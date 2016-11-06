@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Map {
 	
-	private ArrayList<Player> players;
+	//private ArrayList<Player> players;
 	private ArrayList<ArrayList<Cell>> cells;
 	private static Map map;
 	
 	private Map(){
-		players = new ArrayList<>();
+		//players = new ArrayList<>();
 		cells = new ArrayList<>();
 		
 		buildMap();
