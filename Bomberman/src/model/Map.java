@@ -6,18 +6,25 @@ public class Map {
 	
 	private ArrayList<Player> players;
 	private ArrayList<ArrayList<Cell>> cells;
+	private static Map map;
 	
-	public Map(){
+	private Map(){
 		players = new ArrayList<>();
 		cells = new ArrayList<>();
 		
 		buildMap();
 	}
 	
+	public static Map getInstance(){
+		if(map == null)
+			map = new Map();
+		return map;
+	}
+	
 	// buildmap est poubelle, alternance ligne pleine de DestructiveCell et d'alternance Undestructible, Destructible
 	private void buildMap() {
 		
-		for(int j = 0; j < MapSetup.getInstance().getWidth(); j++){
+		for(int j = 0; j <= MapSetup.getInstance().getWidth(); j++){
 			if( j % 2 == 0)
 				cells.add(buildCells());
 			else
@@ -28,7 +35,7 @@ public class Map {
 
 	private ArrayList<Cell> buildUDCells() {
 		ArrayList<Cell> cell2 = new ArrayList<>();
-		for(int i = 0; i < MapSetup.getInstance().getHeight(); i++){
+		for(int i = 0; i <= MapSetup.getInstance().getHeight(); i++){
 			if( i % 2 == 0)
 				cell2.add(new DestructiveCell());
 			else

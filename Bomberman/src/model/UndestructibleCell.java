@@ -7,5 +7,5 @@ public class UndestructibleCell extends Cell {
 	}
 
 	@Override
-	public void updateState() {	}
+	public void destroy() {	}
 }

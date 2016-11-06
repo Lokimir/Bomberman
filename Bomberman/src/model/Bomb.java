@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.Thread.State;
+
 public class Bomb {
 	
 	private long duration;
@@ -24,6 +26,10 @@ public class Bomb {
 		bThread = new BombThread(this);
 	}
 	
+	public boolean isDrop() {
+		return isDrop;
+	}
+
 	public void setSpread(int spread) {
 		this.spread = spread;
 	}
@@ -41,13 +47,34 @@ public class Bomb {
 			isDrop = true;
 			this.x = x;
 			this.y = y;
-			bThread.start();		
+			if(bThread.getState() != State.NEW)
+				bThread = new BombThread(this);
+			bThread.start();
 		}
 	}
 
 	public void explode() {
-		
 		isDrop = false;
+		
+		explode(x, y, 1);
+		explode(x + 1, y, spread);
+		explode(x, y - 1, spread);
+		explode(x - 1, y, spread);
+		explode(x, y + 1, spread);
 	}
 
+	private void explode(int x, int y, int spread){
+		if(spread > 0 && x >= 0 && x <= MapSetup.getInstance().getWidth() && y >= 0 && y <= MapSetup.getInstance().getHeight()){
+			Map.getInstance().getCell(x, y).destroy();
+			if(Map.getInstance().getCell(x, y).getClass() == DestructiveCell.class)
+				if( x - this.x > 0 )
+					explode( x + 1, y, spread - 1 );
+				else if( x - this.x < 0)
+					explode( x - 1, y, spread - 1 );
+				else if( y - this.y > 0)
+					explode( x, y + 1, spread - 1 );
+				else if( y - this.y < 0)
+					explode( x, y - 1 , spread - 1 );
+		}
+	}
 }

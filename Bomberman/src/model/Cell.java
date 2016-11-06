@@ -16,5 +16,5 @@ public abstract class Cell {
 		isDestroyed = false;
 	}
 	
-	public abstract void updateState();
+	public abstract void destroy();
 }

@@ -7,7 +7,7 @@ public class DestructiveCell extends Cell {
 	}
 
 	@Override
-	public void updateState() {
+	public void destroy() {
 		if(!isDestroyed)
 			super.isDestroyed = true;
 	}
