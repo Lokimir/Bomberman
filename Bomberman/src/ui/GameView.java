@@ -15,8 +15,8 @@ import ui.controller.PlayerController;
 
 public class GameView extends JPanel {
 
-	Model model;
-	private PlayerController controller;
+	private Model model;
+	private BasicController controller;
 	
 	public GameView(Model model)
 	{
@@ -24,6 +24,8 @@ public class GameView extends JPanel {
 		this.controller = new BasicController(model, model.getPlayer());
 		this.controller.setView(this);
 		this.addKeyListener(controller);
+
+		this.setFocusable(true);
 	}
 	
 	@Override
@@ -47,6 +49,8 @@ public class GameView extends JPanel {
 		}
 		
 		g2d.setColor(Color.RED);
-		g2d.fillOval(model.getPlayer().getX(), model.getPlayer().getY(), 64, 48);
+		g2d.fillOval(model.getPlayer().getX()*64, model.getPlayer().getY()*48, 64, 48);
+	
+		g2d.setColor(Color.CYAN);
 	}
 }

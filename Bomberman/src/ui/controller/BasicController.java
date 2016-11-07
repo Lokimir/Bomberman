@@ -7,10 +7,6 @@ import core.Player;
 import ui.GameView;
 
 public class BasicController extends PlayerController {
-
-	private Model model;
-	private Player player;
-	private GameView gview;
 	
 	public BasicController(Model model, Player player){
 		super(model, player);
@@ -32,9 +28,12 @@ public class BasicController extends PlayerController {
 		case KeyEvent.VK_D:
 			player.moveRight();
 			break;
+		case KeyEvent.VK_SPACE:
+			player.dropBomb();
+			break;
 		};
 		
-		this.gview.repaint();
+		gview.repaint();
 	};
 
 }
