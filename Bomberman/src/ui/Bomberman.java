@@ -26,14 +26,15 @@ public class Bomberman extends JFrame {
 		model = Model.getInstance();
 		
 		this.gview = new GameView(this.model);
-		this.gview.setPreferredSize(new Dimension(704,528));
+		this.gview.setPreferredSize(new Dimension(528,528));
 		this.getContentPane().add(this.gview, java.awt.BorderLayout.CENTER);
 	}
 	
 	public static void main(String[] args) {
 		Bomberman game = new Bomberman();
-		game.pack();
+		game.setResizable(false);
 		game.setLocationRelativeTo(null);
+		game.pack();
 		game.setVisible(true);
 	}
 }

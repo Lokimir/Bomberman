@@ -14,6 +14,8 @@ public class Cell {
 	
 	public void destroy(){
 		if(state == StateCell.BREAKABLE)
+			state = StateCell.EXPLOSING;
+		else if (state == StateCell.EXPLOSING)
 			state = StateCell.BROKE;
 	}
 
@@ -23,5 +25,9 @@ public class Cell {
 
 	public boolean isBroke() {
 		return (state == StateCell.BROKE);
+	}
+
+	public boolean isExplosing() {
+		return (state == StateCell.EXPLOSING);
 	}
 }

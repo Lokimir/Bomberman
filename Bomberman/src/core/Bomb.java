@@ -1,7 +1,8 @@
 package core;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ui.GameView;
 import ui.view.BasicDraftman;
@@ -31,14 +32,24 @@ public class Bomb extends Thread {
 	
 	@Override
 	public void run() {
-		try {
-			Thread.sleep(bombStats.getDuration());
-			this.explode();
-			this.removeBomb();
-			gview.repaint();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			Timer t = new Timer();
+			t.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					explode();
+					removeBomb();
+					gview.repaint();
+				}
+			}, bombStats.getDuration()-bombStats.getDuration()/10);
+			
+			t.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					explode();
+
+					gview.repaint();
+				}
+			}, bombStats.getDuration());
 	}
 	
 	public void explode() {	
@@ -54,7 +65,7 @@ public class Bomb extends Thread {
 		if(spread > 0 && x >= 0 && x <= Map.getInstance().getWidth() && y >= 0 && y <= Map.getInstance().getHeight()){
 			Map.getInstance().getCell(x, y).destroy();
 			if(Map.getInstance().getCell(x, y).isBreakable())
-				if( x - this.x > 0 )
+				if( x - this.x 	> 0 )
 					explode( x + 1, y, spread - 1 );
 				else if( x - this.x < 0)
 					explode( x - 1, y, spread - 1 );

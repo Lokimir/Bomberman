@@ -12,7 +12,7 @@ import core.Player;
 public class BasicDraftman implements BombermanVisitor	{
 	private Graphics2D g2d;
 		
-	private final int CELL_SIZE_WIDTH = 64;
+	private final int CELL_SIZE_WIDTH = 48;
 	private final int CELL_SIZE_HEIGHT = 48;
 	
 	public void setGraphics(Graphics2D g2d)
@@ -36,6 +36,8 @@ public class BasicDraftman implements BombermanVisitor	{
 					g2d.setColor(Color.WHITE);
 				else if (c.isBreakable())
 					g2d.setColor(Color.GRAY);				
+				else if (c.isExplosing())
+					g2d.setColor(Color.ORANGE);
 				else
 					g2d.setColor(Color.BLACK);
 				
