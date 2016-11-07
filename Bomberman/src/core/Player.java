@@ -39,7 +39,7 @@ public class Player {
 		this.y++;			
 	}
 
-	public BombThread dropBomb(){
-		return new BombThread();
+	public Bomb dropBomb(){
+		return new Bomb();
 	}
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import core.BombThread;
+import core.Bomb;
 import core.Cell;
 import core.DestructiveCell;
 import core.Model;
@@ -66,7 +66,7 @@ public class GameView extends JPanel {
 		}
 			
 		g2d.setColor(Color.CYAN);
-		for (BombThread b : model.getBombs()){
+		for (Bomb b : model.getBombs()){
 			b.paintComponent(g2d);			
 		}
 	}

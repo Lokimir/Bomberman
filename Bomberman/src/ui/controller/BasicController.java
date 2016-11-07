@@ -2,7 +2,7 @@ package ui.controller;
 
 import java.awt.event.KeyEvent;
 
-import core.BombThread;
+import core.Bomb;
 import core.Map;
 import core.MapSetup;
 import core.Model;
@@ -23,6 +23,7 @@ public class BasicController extends PlayerController {
 		if(e.getKeyCode() == keyboard.getKey(Action.UP)){
 			if(player.getY()-1 >= 0 && model.getMap().getCell(player.getX(), player.getY() -1).isDestroyed())
 				player.moveUp();
+			
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.DOWN)){
 			if(player.getY()+1 <= MapSetup.getInstance().getHeight() && model.getMap().getCell(player.getX(), player.getY() +1).isDestroyed())
@@ -38,7 +39,7 @@ public class BasicController extends PlayerController {
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
 			if (player.getBombStats().getDroppableBomb() > 0){
-				BombThread b = player.dropBomb();
+				Bomb b = player.dropBomb();
 				b.start(player.getX(), player.getY(), player.getBombStats(), gview, model.getBombs());
 			}
 		}

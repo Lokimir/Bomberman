@@ -7,10 +7,10 @@ public class Model {
 	private Map map;
 	private ArrayList<Player> players;
 	private static Model model;
-	private volatile ArrayList<BombThread> bombs;
+	private volatile ArrayList<Bomb> bombs;
 	
 	private Model(){
-		bombs = new ArrayList<BombThread>();
+		bombs = new ArrayList<Bomb>();
 		map = Map.getInstance();
 		players = new ArrayList<Player>(); 
 		players.add(new Player(0, 0));
@@ -35,7 +35,7 @@ public class Model {
 		return players.get(index);
 	}
 	
-	public ArrayList<BombThread> getBombs(){
+	public ArrayList<Bomb> getBombs(){
 		return bombs;
 	}
 
