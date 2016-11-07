@@ -3,11 +3,8 @@ package ui.controller;
 import java.awt.event.KeyEvent;
 
 import core.Bomb;
-import core.Map;
-import core.MapSetup;
 import core.Model;
 import core.Player;
-import ui.controller.KeyBoardOptions;
 
 public class BasicController extends PlayerController {
 
@@ -26,7 +23,7 @@ public class BasicController extends PlayerController {
 			
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.DOWN)){
-			if(player.getY()+1 <= MapSetup.getInstance().getHeight() && model.getMap().getCell(player.getX(), player.getY() +1).isBroke())
+			if(player.getY()+1 <= model.getMap().getHeight() && model.getMap().getCell(player.getX(), player.getY() +1).isBroke())
 				player.moveDown();
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.LEFT)){
@@ -34,7 +31,7 @@ public class BasicController extends PlayerController {
 				player.moveLeft();
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.RIGHT)){
-			if(player.getX()+1 <= MapSetup.getInstance().getWidth() && model.getMap().getCell(player.getX() +1, player.getY()).isBroke())
+			if(player.getX()+1 <= model.getMap().getWidth() && model.getMap().getCell(player.getX() +1, player.getY()).isBroke())
 				player.moveRight();
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.DROP)){

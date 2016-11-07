@@ -50,7 +50,7 @@ public class Bomb extends Thread {
 
 	private void explode(int x, int y, int spread){
 
-		if(spread > 0 && x >= 0 && x <= MapSetup.getInstance().getWidth() && y >= 0 && y <= MapSetup.getInstance().getHeight()){
+		if(spread > 0 && x >= 0 && x <= Map.getInstance().getWidth() && y >= 0 && y <= Map.getInstance().getHeight()){
 			Map.getInstance().getCell(x, y).destroy();
 			if(Map.getInstance().getCell(x, y).isBreakable())
 				if( x - this.x > 0 )
