@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import ui.controller.BasicController;
-import ui.controller.KeyBoardOptions;
 import core.Bomb;
 import core.Cell;
 import core.Model;
 import core.Player;
+import ui.controller.BasicController;
+import ui.controller.KeyBoardOptions;
 
 public class GameView extends JPanel {
 
