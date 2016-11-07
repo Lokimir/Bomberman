@@ -6,8 +6,9 @@ public class Map {
 	
 	//private ArrayList<Player> players;
 	private ArrayList<ArrayList<Cell>> cells;
+
 	private static Map map;
-	
+
 	private Map(){
 		//players = new ArrayList<>();
 		cells = new ArrayList<>();
@@ -46,9 +47,13 @@ public class Map {
 
 	private ArrayList<Cell> buildCells() {
 		ArrayList<Cell> cell1 = new ArrayList<>();
-		for(int i = 0; i < MapSetup.getInstance().getHeight(); i++)
+		for(int i = 0; i <= MapSetup.getInstance().getHeight(); i++)
 			cell1.add(new DestructiveCell());
 		return cell1;
+	}
+
+	public ArrayList<ArrayList<Cell>> getCells() {
+		return cells;
 	}
 
 	public Cell getCell(int x, int y){
