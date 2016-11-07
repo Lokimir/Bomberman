@@ -1,20 +1,31 @@
 package core;
 
-public abstract class Cell {
+public class Cell {
 
-	protected boolean isDestroyed;
+	private StateCell state;
 
-	public boolean isDestroyed() {
-		return isDestroyed;
-	}
-
-	public void setDestroyed(boolean isDestroyed) {
-		this.isDestroyed = isDestroyed;
-	}
-
-	public Cell(){
-		isDestroyed = false;
+	public Cell(StateCell state){
+		this.state = state;
 	}
 	
-	public abstract void destroy();
+	public void setState(StateCell state){
+		this.state = state;
+	}
+	
+	public boolean isDestroyed(){
+		return (state == StateCell.BROKE);
+	}
+	
+	public void destroy(){
+		if(state == StateCell.BREAKABLE)
+			state = StateCell.BROKE;
+	}
+
+	public boolean isBreakable() {
+		return (state == StateCell.BREAKABLE);
+	}
+
+	public boolean isBroke() {
+		return (state == StateCell.BROKE);
+	}
 }

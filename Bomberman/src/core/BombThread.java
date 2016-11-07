@@ -52,7 +52,7 @@ public class BombThread extends Thread {
 
 		if(spread > 0 && x >= 0 && x <= MapSetup.getInstance().getWidth() && y >= 0 && y <= MapSetup.getInstance().getHeight()){
 			Map.getInstance().getCell(x, y).destroy();
-			if(Map.getInstance().getCell(x, y).getClass() == DestructiveCell.class)
+			if(Map.getInstance().getCell(x, y).isBreakable())
 				if( x - this.x > 0 )
 					explode( x + 1, y, spread - 1 );
 				else if( x - this.x < 0)

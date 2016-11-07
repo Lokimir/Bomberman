@@ -8,13 +8,12 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import core.BombThread;
-import core.Cell;
-import core.DestructiveCell;
-import core.Model;
-import core.Player;
 import ui.controller.BasicController;
 import ui.controller.KeyBoardOptions;
+import core.Bomb;
+import core.Cell;
+import core.Model;
+import core.Player;
 
 public class GameView extends JPanel {
 
@@ -44,16 +43,14 @@ public class GameView extends JPanel {
 		for (ArrayList<Cell> lc : model.getMap().getCells()){
 			int j = 0;
 			for (Cell c : lc){
-				if (c.getClass() == DestructiveCell.class){
-					if(c.isDestroyed())
-						g2d.setColor(Color.WHITE);
-					else
-						g2d.setColor(Color.GRAY);
-				}					
-				else	
+				if (c.isBreakable())
+					g2d.setColor(Color.GRAY);
+				else if(c.isBroke())
+					g2d.setColor(Color.WHITE);
+				else
 					g2d.setColor(Color.BLACK);
 				
-					g2d.fillRect(i*64, j*48, 64, 48);
+				g2d.fillRect(i*64, j*48, 64, 48);
 				
 				j++;
 			}
@@ -66,7 +63,7 @@ public class GameView extends JPanel {
 		}
 			
 		g2d.setColor(Color.CYAN);
-		for (BombThread b : model.getBombs()){
+		for (Bomb b : model.getBombs()){
 			b.paintComponent(g2d);			
 		}
 	}

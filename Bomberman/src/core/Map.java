@@ -38,9 +38,9 @@ public class Map {
 		ArrayList<Cell> cell2 = new ArrayList<>();
 		for(int i = 0; i <= MapSetup.getInstance().getHeight(); i++){
 			if( i % 2 == 0)
-				cell2.add(new DestructiveCell());
+				cell2.add(new Cell(StateCell.BREAKABLE));
 			else
-				cell2.add(new UndestructibleCell());
+				cell2.add(new Cell(StateCell.UNBREAKABLE));
 		}
 		return cell2;
 	}
@@ -48,7 +48,7 @@ public class Map {
 	private ArrayList<Cell> buildCells() {
 		ArrayList<Cell> cell1 = new ArrayList<>();
 		for(int i = 0; i <= MapSetup.getInstance().getHeight(); i++)
-			cell1.add(new DestructiveCell());
+			cell1.add(new Cell(StateCell.BREAKABLE));
 		return cell1;
 	}
 
