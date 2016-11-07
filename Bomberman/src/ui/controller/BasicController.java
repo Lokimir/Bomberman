@@ -21,20 +21,20 @@ public class BasicController extends PlayerController {
 	@Override
 	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode() == keyboard.getKey(Action.UP)){
-			if(player.getY()-1 >= 0 && model.getMap().getCell(player.getX(), player.getY() -1).isDestroyed())
+			if(player.getY()-1 >= 0 && model.getMap().getCell(player.getX(), player.getY() -1).isBroke())
 				player.moveUp();
 			
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.DOWN)){
-			if(player.getY()+1 <= MapSetup.getInstance().getHeight() && model.getMap().getCell(player.getX(), player.getY() +1).isDestroyed())
+			if(player.getY()+1 <= MapSetup.getInstance().getHeight() && model.getMap().getCell(player.getX(), player.getY() +1).isBroke())
 				player.moveDown();
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.LEFT)){
-			if(player.getX()-1 >= 0 && model.getMap().getCell(player.getX() -1, player.getY()).isDestroyed())
+			if(player.getX()-1 >= 0 && model.getMap().getCell(player.getX() -1, player.getY()).isBroke())
 				player.moveLeft();
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.RIGHT)){
-			if(player.getX()+1 <= MapSetup.getInstance().getWidth() && model.getMap().getCell(player.getX() +1, player.getY()).isDestroyed())
+			if(player.getX()+1 <= MapSetup.getInstance().getWidth() && model.getMap().getCell(player.getX() +1, player.getY()).isBroke())
 				player.moveRight();
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.DROP)){

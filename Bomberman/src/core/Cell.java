@@ -12,10 +12,6 @@ public class Cell {
 		this.state = state;
 	}
 	
-	public boolean isDestroyed(){
-		return (state == StateCell.BROKE);
-	}
-	
 	public void destroy(){
 		if(state == StateCell.BREAKABLE)
 			state = StateCell.BROKE;
