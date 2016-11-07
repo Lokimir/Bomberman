@@ -26,6 +26,14 @@ public class Bomb {
 		bThread = new BombThread(this);
 	}
 	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	public boolean isDrop() {
 		return isDrop;
 	}

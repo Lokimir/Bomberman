@@ -15,6 +15,10 @@ public class Player {
 		return x;
 	}
 
+	public Bomb getBomb() {
+		return bomb;
+	}
+
 	public int getY() {
 		return y;
 	}

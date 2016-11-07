@@ -36,10 +36,14 @@ public class GameView extends JPanel {
 		for (ArrayList<Cell> lc : model.getMap().getCells()){
 			int j = 0;
 			for (Cell c : lc){
-				if (c.getClass() == DestructiveCell.class)
-					g2d.setColor(Color.BLACK);
+				if (c.getClass() == DestructiveCell.class){
+					if(c.isDestroyed())
+						g2d.setColor(Color.WHITE);
+					else
+						g2d.setColor(Color.gray);
+				}					
 				else
-					g2d.setColor(Color.WHITE);
+					g2d.setColor(Color.BLACK);
 				
 					g2d.fillRect(i*64, j*48, 64, 48);
 				
@@ -52,5 +56,7 @@ public class GameView extends JPanel {
 		g2d.fillOval(model.getPlayer().getX()*64, model.getPlayer().getY()*48, 64, 48);
 	
 		g2d.setColor(Color.CYAN);
+		if(model.getPlayer().getBomb().isDrop())
+			g2d.drawOval(model.getPlayer().getBomb().getX()*64, model.getPlayer().getBomb().getY()*48, 64, 48);
 	}
 }

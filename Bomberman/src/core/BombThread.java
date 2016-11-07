@@ -15,7 +15,6 @@ public class BombThread extends Thread {
 			Thread.sleep(bomb.getDuration());
 			bomb.explode();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
