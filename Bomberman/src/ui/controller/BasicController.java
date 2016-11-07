@@ -2,6 +2,7 @@ package ui.controller;
 
 import java.awt.event.KeyEvent;
 
+import core.BombThread;
 import core.Map;
 import core.MapSetup;
 import core.Model;
@@ -9,36 +10,37 @@ import core.Player;
 import ui.GameView;
 
 public class BasicController extends PlayerController {
-	
-	public BasicController(Model model, Player player){
+
+	private KeyBoardOptions keyboard;
+
+	public BasicController(Model model, Player player, KeyBoardOptions keyBoard){
 		super(model, player);
+		this.keyboard = keyBoard;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e){
-		switch (e.getKeyCode())
-		{
-		case KeyEvent.VK_Z:
-			if(model.getPlayer().getY()-1 >= 0 && model.getMap().getCell(model.getPlayer().getX(), model.getPlayer().getY() -1).isDestroyed())
+		if(e.getKeyCode() == keyboard.getKey(Action.UP)){
+			if(player.getY()-1 >= 0 && model.getMap().getCell(player.getX(), player.getY() -1).isDestroyed())
 				player.moveUp();
-			break;
-		case KeyEvent.VK_S:
-			if(model.getPlayer().getY()+1 <= MapSetup.getInstance().getHeight() && model.getMap().getCell(model.getPlayer().getX(), model.getPlayer().getY() +1).isDestroyed())
+		}
+		else if(e.getKeyCode() == keyboard.getKey(Action.DOWN)){
+			if(player.getY()+1 <= MapSetup.getInstance().getHeight() && model.getMap().getCell(player.getX(), player.getY() +1).isDestroyed())
 				player.moveDown();
-			break;
-		case KeyEvent.VK_Q:
-			if(model.getPlayer().getX()-1 >= 0 && model.getMap().getCell(model.getPlayer().getX() -1, model.getPlayer().getY()).isDestroyed())
+		}
+		else if(e.getKeyCode() == keyboard.getKey(Action.LEFT)){
+			if(player.getX()-1 >= 0 && model.getMap().getCell(player.getX() -1, player.getY()).isDestroyed())
 				player.moveLeft();
-			break;
-		case KeyEvent.VK_D:
-			if(model.getPlayer().getX()+1 <= MapSetup.getInstance().getWidth() && model.getMap().getCell(model.getPlayer().getX() +1, model.getPlayer().getY()).isDestroyed())
-			player.moveRight();
-			break;
-		case KeyEvent.VK_SPACE:
-			player.dropBomb();
-			break;
-		};
-		
+		}
+		else if(e.getKeyCode() == keyboard.getKey(Action.RIGHT)){
+			if(player.getX()+1 <= MapSetup.getInstance().getWidth() && model.getMap().getCell(player.getX() +1, player.getY()).isDestroyed())
+				player.moveRight();
+		}
+		else if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
+			BombThread b = player.dropBomb();
+			b.start(player.getX(), player.getY(), player.getBombStats(), gview, model.getBombs());
+			model.getBombs().add(b);
+		}
 		gview.repaint();
 	};
 

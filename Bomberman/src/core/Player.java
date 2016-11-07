@@ -3,20 +3,20 @@ package core;
 public class Player {
 
 	private int x,y;
-	private Bomb bomb;
+	private BombStats bombStats;
 
 	public Player(int x, int y){
 		this.x = x;
 		this.y = y;
-		this.bomb = new Bomb();
+		this.bombStats = new BombStats();
 	}
 
 	public int getX() {
 		return x;
 	}
 
-	public Bomb getBomb() {
-		return bomb;
+	public BombStats getBombStats() {
+		return bombStats;
 	}
 
 	public int getY() {
@@ -39,7 +39,7 @@ public class Player {
 		this.y++;			
 	}
 
-	public void dropBomb(){
-		bomb.drop(x, y);
+	public BombThread dropBomb(){
+		return new BombThread();
 	}
 }
