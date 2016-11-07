@@ -3,27 +3,34 @@ package ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import ui.controller.BasicController;
+import ui.controller.KeyBoardOptions;
 import core.Cell;
 import core.DestructiveCell;
 import core.Model;
-import ui.controller.BasicController;
-import ui.controller.PlayerController;
+import core.Player;
 
 public class GameView extends JPanel {
 
 	private Model model;
-	private BasicController controller;
+	private ArrayList<BasicController> controller;
 	
 	public GameView(Model model)
 	{
 		this.model = model;
-		this.controller = new BasicController(model, model.getPlayer());
-		this.controller.setView(this);
-		this.addKeyListener(controller);
+		this.controller = new ArrayList<BasicController>();
+		this.controller.add(new BasicController(model, model.getPlayer(0), new KeyBoardOptions(KeyEvent.VK_Z,KeyEvent.VK_S,KeyEvent.VK_Q, KeyEvent.VK_D, KeyEvent.VK_SPACE)));
+		this.controller.add(new BasicController(model, model.getPlayer(1), new KeyBoardOptions(KeyEvent.VK_UP,KeyEvent.VK_DOWN,KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER)));
+		this.controller.get(0).setView(this);
+		this.controller.get(1).setView(this);
+		for(BasicController bc : controller){
+			this.addKeyListener(bc);
+		}
 
 		this.setFocusable(true);
 	}
@@ -52,11 +59,13 @@ public class GameView extends JPanel {
 			i++;
 		}
 		
-		g2d.setColor(Color.RED);
-		g2d.fillOval(model.getPlayer().getX()*64, model.getPlayer().getY()*48, 64, 48);
-	
-		g2d.setColor(Color.CYAN);
-		if(model.getPlayer().getBomb().isDrop())
-			g2d.drawOval(model.getPlayer().getBomb().getX()*64, model.getPlayer().getBomb().getY()*48, 64, 48);
+		for(Player p : model.getPlayers()){
+			g2d.setColor(Color.RED);
+			g2d.fillOval(p.getX()*64, p.getY()*48, 64, 48);
+			
+			g2d.setColor(Color.CYAN);
+			if(p.getBomb().isDrop())
+				g2d.drawOval(p.getBomb().getX()*64, p.getBomb().getY()*48, 64, 48);
+		}
 	}
 }

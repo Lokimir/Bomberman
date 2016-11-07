@@ -1,14 +1,18 @@
 package core;
 
+import java.util.ArrayList;
+
 public class Model {
 	
 	private Map map;
-	private Player player;
+	private ArrayList<Player> players;
 	private static Model model;
 	
 	private Model(){
 		map = Map.getInstance();
-		player = new Player(0, 0);
+		players = new ArrayList<Player>(); 
+		players.add(new Player(0, 0));
+		players.add(new Player(10, 10));
 	}
 	
 	public static Model getInstance(){
@@ -20,8 +24,13 @@ public class Model {
 	public Map getMap() {
 		return map;
 	}
-	public Player getPlayer() {
-		return player;
+	
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+	
+	public Player getPlayer(int index) {
+		return players.get(index);
 	}
 	
 	
