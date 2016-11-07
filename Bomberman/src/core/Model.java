@@ -38,6 +38,5 @@ public class Model {
 	public ArrayList<BombThread> getBombs(){
 		return bombs;
 	}
-	
 
 }

@@ -7,7 +7,7 @@ import core.Map;
 import core.MapSetup;
 import core.Model;
 import core.Player;
-import ui.GameView;
+import ui.controller.KeyBoardOptions;
 
 public class BasicController extends PlayerController {
 
@@ -17,7 +17,7 @@ public class BasicController extends PlayerController {
 		super(model, player);
 		this.keyboard = keyBoard;
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode() == keyboard.getKey(Action.UP)){
