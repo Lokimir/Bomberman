@@ -43,5 +43,4 @@ public class BasicController extends PlayerController {
 		}
 		gview.repaint();
 	};
-
 }
