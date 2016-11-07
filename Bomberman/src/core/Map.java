@@ -2,9 +2,12 @@ package core;
 
 import java.util.ArrayList;
 
+import ui.view.BasicDraftman;
+
 public class Map {
 	
-	//private ArrayList<Player> players;
+	private final static int WIDTH = 10;
+	private final static int HEIGHT = 10;
 	private ArrayList<ArrayList<Cell>> cells;
 
 	private static Map map;
@@ -25,7 +28,7 @@ public class Map {
 	// buildmap est poubelle, alternance ligne pleine de DestructiveCell et d'alternance Undestructible, Destructible
 	private void buildMap() {
 		
-		for(int j = 0; j <= MapSetup.getInstance().getWidth(); j++){
+		for(int j = 0; j <= WIDTH; j++){
 			if( j % 2 == 0)
 				cells.add(buildCells());
 			else
@@ -36,7 +39,7 @@ public class Map {
 
 	private ArrayList<Cell> buildUDCells() {
 		ArrayList<Cell> cell2 = new ArrayList<>();
-		for(int i = 0; i <= MapSetup.getInstance().getHeight(); i++){
+		for(int i = 0; i <= HEIGHT; i++){
 			if( i % 2 == 0)
 				cell2.add(new Cell(StateCell.BREAKABLE));
 			else
@@ -47,7 +50,7 @@ public class Map {
 
 	private ArrayList<Cell> buildCells() {
 		ArrayList<Cell> cell1 = new ArrayList<>();
-		for(int i = 0; i <= MapSetup.getInstance().getHeight(); i++)
+		for(int i = 0; i <= HEIGHT; i++)
 			cell1.add(new Cell(StateCell.BREAKABLE));
 		return cell1;
 	}
@@ -58,5 +61,17 @@ public class Map {
 
 	public Cell getCell(int x, int y){
 		return cells.get(x).get(y);
+	}
+	
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	public int getHeight() {
+		return HEIGHT;
+	}
+
+	public void accept(BasicDraftman bd) {
+		bd.visitMap(this);
 	}
 }

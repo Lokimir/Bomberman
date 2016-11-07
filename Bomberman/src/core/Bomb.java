@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import ui.GameView;
+import ui.view.BasicDraftman;
 
 public class Bomb extends Thread {
 	
@@ -50,7 +51,7 @@ public class Bomb extends Thread {
 
 	private void explode(int x, int y, int spread){
 
-		if(spread > 0 && x >= 0 && x <= MapSetup.getInstance().getWidth() && y >= 0 && y <= MapSetup.getInstance().getHeight()){
+		if(spread > 0 && x >= 0 && x <= Map.getInstance().getWidth() && y >= 0 && y <= Map.getInstance().getHeight()){
 			Map.getInstance().getCell(x, y).destroy();
 			if(Map.getInstance().getCell(x, y).isBreakable())
 				if( x - this.x > 0 )
@@ -72,12 +73,12 @@ public class Bomb extends Thread {
 		return y;
 	}
 	
-	public void paintComponent(Graphics2D g2d){
-		g2d.drawOval(x*64, y*48, 64, 48);
-	}
-	
 	public void removeBomb(){
 		bombs.remove(this);
 		bombStats.increaseBomb();
+	}
+
+	public void accept(BasicDraftman bd) {
+		bd.visitBomb(this);
 	}	
 }

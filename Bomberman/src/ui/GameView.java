@@ -14,6 +14,7 @@ import core.Model;
 import core.Player;
 import ui.controller.BasicController;
 import ui.controller.KeyBoardOptions;
+import ui.view.BasicDraftman;
 
 public class GameView extends JPanel {
 
@@ -39,32 +40,19 @@ public class GameView extends JPanel {
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		
-		int i = 0;
-		for (ArrayList<Cell> lc : model.getMap().getCells()){
-			int j = 0;
-			for (Cell c : lc){
-				if (c.isBreakable())
-					g2d.setColor(Color.GRAY);
-				else if(c.isBroke())
-					g2d.setColor(Color.WHITE);
-				else
-					g2d.setColor(Color.BLACK);
-				
-				g2d.fillRect(i*64, j*48, 64, 48);
-				
-				j++;
-			}
-			i++;
+		BasicDraftman bd = new BasicDraftman();
+		bd.setGraphics(g2d);
+		
+		this.model.getInstance().getMap().accept(bd);
+		
+		for (Bomb b : this.model.getBombs())
+		{
+			b.accept(bd);
 		}
 		
-		for(Player p : model.getPlayers()){
-			g2d.setColor(Color.RED);
-			g2d.fillOval(p.getX()*64, p.getY()*48, 64, 48);			
-		}
-			
-		g2d.setColor(Color.CYAN);
-		for (Bomb b : model.getBombs()){
-			b.paintComponent(g2d);			
+		for (Player p : this.model.getPlayers())
+		{
+			p.accept(bd);
 		}
 	}
 }

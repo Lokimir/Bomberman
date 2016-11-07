@@ -1,5 +1,7 @@
 package core;
 
+import ui.view.BasicDraftman;
+
 public class Player {
 
 	private int x,y;
@@ -41,5 +43,9 @@ public class Player {
 
 	public Bomb dropBomb(){
 		return new Bomb();
+	}
+
+	public void accept(BasicDraftman bd) {
+		bd.visitPlayer(this);
 	}
 }
