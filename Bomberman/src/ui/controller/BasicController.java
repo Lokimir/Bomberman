@@ -2,6 +2,8 @@ package ui.controller;
 
 import java.awt.event.KeyEvent;
 
+import core.Map;
+import core.MapSetup;
 import core.Model;
 import core.Player;
 import ui.GameView;
@@ -17,15 +19,19 @@ public class BasicController extends PlayerController {
 		switch (e.getKeyCode())
 		{
 		case KeyEvent.VK_Z:
-			player.moveUp();
+			if(model.getPlayer().getY()-1 >= 0 && model.getMap().getCell(model.getPlayer().getX(), model.getPlayer().getY() -1).isDestroyed())
+				player.moveUp();
 			break;
 		case KeyEvent.VK_S:
-			player.moveDown();
+			if(model.getPlayer().getY()+1 <= MapSetup.getInstance().getHeight() && model.getMap().getCell(model.getPlayer().getX(), model.getPlayer().getY() +1).isDestroyed())
+				player.moveDown();
 			break;
 		case KeyEvent.VK_Q:
-			player.moveLeft();
+			if(model.getPlayer().getX()-1 >= 0 && model.getMap().getCell(model.getPlayer().getX() -1, model.getPlayer().getY()).isDestroyed())
+				player.moveLeft();
 			break;
 		case KeyEvent.VK_D:
+			if(model.getPlayer().getX()+1 <= MapSetup.getInstance().getWidth() && model.getMap().getCell(model.getPlayer().getX() +1, model.getPlayer().getY()).isDestroyed())
 			player.moveRight();
 			break;
 		case KeyEvent.VK_SPACE:
