@@ -23,6 +23,8 @@ public class BombThread extends Thread {
 		this.y = y;
 		this.bombs = bombs;
 		
+		bombStats.decreaseBomb();
+		bombs.add(this);
 		this.start();
 	}
 	
@@ -74,8 +76,8 @@ public class BombThread extends Thread {
 		g2d.drawOval(x*64, y*48, 64, 48);
 	}
 	
-	public synchronized void removeBomb(){
+	public void removeBomb(){
 		bombs.remove(this);
-	}
-	
+		bombStats.increaseBomb();
+	}	
 }

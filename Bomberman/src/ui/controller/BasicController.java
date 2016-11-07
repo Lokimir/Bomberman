@@ -17,7 +17,7 @@ public class BasicController extends PlayerController {
 		super(model, player);
 		this.keyboard = keyBoard;
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode() == keyboard.getKey(Action.UP)){
@@ -37,9 +37,10 @@ public class BasicController extends PlayerController {
 				player.moveRight();
 		}
 		else if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
-			BombThread b = player.dropBomb();
-			b.start(player.getX(), player.getY(), player.getBombStats(), gview, model.getBombs());
-			model.getBombs().add(b);
+			if (player.getBombStats().getDroppableBomb() > 0){
+				BombThread b = player.dropBomb();
+				b.start(player.getX(), player.getY(), player.getBombStats(), gview, model.getBombs());
+			}
 		}
 		gview.repaint();
 	};

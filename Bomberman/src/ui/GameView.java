@@ -48,7 +48,7 @@ public class GameView extends JPanel {
 					if(c.isDestroyed())
 						g2d.setColor(Color.WHITE);
 					else
-						g2d.setColor(Color.gray);
+						g2d.setColor(Color.GRAY);
 				}					
 				else	
 					g2d.setColor(Color.BLACK);

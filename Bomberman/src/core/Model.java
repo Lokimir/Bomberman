@@ -7,7 +7,7 @@ public class Model {
 	private Map map;
 	private ArrayList<Player> players;
 	private static Model model;
-	private ArrayList<BombThread> bombs;
+	private volatile ArrayList<BombThread> bombs;
 	
 	private Model(){
 		bombs = new ArrayList<BombThread>();
