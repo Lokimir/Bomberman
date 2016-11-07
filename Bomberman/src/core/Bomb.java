@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 import ui.GameView;
 
-public class BombThread extends Thread {
+public class Bomb extends Thread {
 	
 	private BombStats bombStats;
 	private int x, y;
 	
-	private ArrayList<BombThread> bombs;
+	private ArrayList<Bomb> bombs;
 	private GameView gview;
 	
-	public BombThread() {
+	public Bomb() {
 	}
 
-	public void start(int x, int y, BombStats bombStats, GameView gview, ArrayList<BombThread> bombs){
+	public void start(int x, int y, BombStats bombStats, GameView gview, ArrayList<Bomb> bombs){
 		this.bombStats = bombStats;
 		this.gview = gview;
 		this.x = x;
