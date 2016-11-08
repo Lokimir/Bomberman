@@ -26,14 +26,14 @@ public class Cell {
 	}
 
 	private Bonus randomBonus() {
-		Bonus bonus;
+		Bonus bonus = null;
+		
 		double percent = Math.random()*100;
 		if(percent < 7.5){
 			bonus = new BonusSpread();
 		} else if (percent < 15)
 			bonus = new BonusBomb();
-		else 
-			bonus = null;
+		
 		return bonus;
 	}
 

@@ -35,7 +35,7 @@ public class BasicController extends PlayerController {
 			
 			if (nextCell.containBonus()){
 				nextCell.getBonus().apply(player.getBombStats());
-				nextCell.takeBonus();
+				//nextCell.takeBonus();
 			}
 		}
 		
