@@ -3,11 +3,13 @@ package core;
 import ui.view.BasicDraftman;
 
 public class Player {
-
+	
+	private boolean isAlive;
 	private int x,y;
 	private BombStats bombStats;
 
 	public Player(int x, int y){
+		this.isAlive = true;
 		this.x = x;
 		this.y = y;
 		this.bombStats = new BombStats();
@@ -47,5 +49,13 @@ public class Player {
 
 	public void accept(BasicDraftman bd) {
 		bd.visitPlayer(this);
+	}
+
+	public void die() {
+		isAlive = false;
+	}
+
+	public boolean isALive() {
+		return isAlive;
 	}
 }

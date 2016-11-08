@@ -2,9 +2,6 @@ package ui.view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-
-import javax.swing.Box.Filler;
 
 import core.Bomb;
 import core.Cell;
@@ -55,8 +52,10 @@ public class BasicDraftman implements BombermanVisitor	{
 	
 	@Override
 	public void visitPlayer(Player p) {
-		g2d.setColor(Color.RED);
-		g2d.fillOval(p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+		if(p.isALive()){
+			g2d.setColor(Color.RED);
+			g2d.fillOval(p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+		}
 	}
 	
 }

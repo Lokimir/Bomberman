@@ -39,4 +39,8 @@ public class Model {
 		return bombs;
 	}
 
+	public void removePlayer(Player player) {
+		players.remove((Player) player);
+	}
+
 }

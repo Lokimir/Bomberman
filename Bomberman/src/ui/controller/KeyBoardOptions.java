@@ -1,10 +1,5 @@
 package ui.controller;
 
-import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.nio.file.Path;
 import java.util.HashMap;
 
 public class KeyBoardOptions {

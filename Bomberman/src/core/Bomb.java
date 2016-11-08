@@ -63,7 +63,12 @@ public class Bomb extends Thread {
 	private void explode(int x, int y, int spread){
 
 		if(spread > 0 && x >= 0 && x <= Map.getInstance().getWidth() && y >= 0 && y <= Map.getInstance().getHeight()){
-			Map.getInstance().getCell(x, y).destroy();
+			Map.getInstance().getCell(x, y).destroy();interrupt();
+			for(Player p : gview.getModel().getPlayers())
+				if(p.getX() == x && p.getY() == y){
+					gview.getModel().removePlayer(p);
+					gview.removeKeyListener(gview.getController(p));
+				}
 			if(Map.getInstance().getCell(x, y).isBreakable())
 				if( x - this.x 	> 0 )
 					explode( x + 1, y, spread - 1 );
