@@ -33,7 +33,13 @@ public class Map {
 				else
 					cells.add(buildUnDestCells(j,i));				
 			}
-		}	
+		}
+		getCell(0, 0).setState(StateCell.BROKE);
+		getCell(0, 1).setState(StateCell.BROKE);
+		getCell(1, 0).setState(StateCell.BROKE);
+		getCell(10, 10).setState(StateCell.BROKE);
+		getCell(10, 9).setState(StateCell.BROKE);
+		getCell(9, 10).setState(StateCell.BROKE);
 	}
 
 	private Cell buildUnDestCells(int x, int y) {
