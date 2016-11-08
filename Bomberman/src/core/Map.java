@@ -23,31 +23,28 @@ public class Map {
 		return map;
 	}
 	
-	// buildmap est poubelle, alternance ligne pleine de DestructiveCell et d'alternance Undestructible, Destructible
 	private void buildMap() {
 		
 		for(int j = 0; j <= WIDTH; j++){
 			for(int i = 0; i <= HEIGHT; i++){
 				if( j % 2 == 0 || i % 2 == 0)
-					cells.add(buildDestCell(j,i));
+					cells.add(new Cell(j, i, StateCell.BREAKABLE));
 				else
-					cells.add(buildUnDestCells(j,i));				
+					cells.add(new Cell(j, i, StateCell.UNBREAKABLE));				
 			}
 		}
 		getCell(0, 0).setState(StateCell.BROKE);
+		getCell(0, 0).takeBonus();
 		getCell(0, 1).setState(StateCell.BROKE);
+		getCell(0, 1).takeBonus();
 		getCell(1, 0).setState(StateCell.BROKE);
+		getCell(1, 0).takeBonus();
 		getCell(10, 10).setState(StateCell.BROKE);
+		getCell(10, 10).takeBonus();
 		getCell(10, 9).setState(StateCell.BROKE);
+		getCell(10, 9).takeBonus();
 		getCell(9, 10).setState(StateCell.BROKE);
-	}
-
-	private Cell buildUnDestCells(int x, int y) {
-		return new Cell(x, y, StateCell.UNBREAKABLE);
-	}
-
-	private Cell buildDestCell(int x, int y) {
-		return new Cell(x, y, StateCell.BREAKABLE);
+		getCell(9, 10).takeBonus();
 	}
 
 	public ArrayList<Cell> getCells() {

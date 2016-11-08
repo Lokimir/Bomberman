@@ -10,7 +10,8 @@ public class Cell {
 		this.state = state;
 		this.x = x;
 		this.y = y;
-		this.bonus = randomBonus();
+		if(state == StateCell.BREAKABLE)
+			this.bonus = randomBonus();
 	}
 	
 	public int getX() {
@@ -58,5 +59,9 @@ public class Cell {
 
 	public boolean containBonus() {
 		return (bonus != null);
+	}
+
+	public void takeBonus() {
+		bonus = null;
 	}
 }
