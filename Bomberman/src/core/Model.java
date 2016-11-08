@@ -13,8 +13,8 @@ public class Model {
 		bombs = new ArrayList<Bomb>();
 		map = Map.getInstance();
 		players = new ArrayList<Player>(); 
-		players.add(new Player(0, 0));
-		players.add(new Player(10, 10));
+		players.add(new Player(1, 1));
+		players.add(new Player(map.getWidth()-1, map.getHeight()-1));
 	}
 	
 	public static Model getInstance(){

@@ -27,22 +27,6 @@ public class Player {
 		return y;
 	}
 
-	public void moveLeft(){
-		this.x--;			
-	}
-
-	public void moveRight(){
-		this.x++;			
-	}
-
-	public void moveUp(){
-		this.y--;			
-	}
-
-	public void moveDown(){
-		this.y++;			
-	}
-
 	public Bomb dropBomb(){
 		return new Bomb();
 	}
@@ -57,5 +41,10 @@ public class Player {
 
 	public boolean isALive() {
 		return isAlive;
+	}
+
+	public void move(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 }

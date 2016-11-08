@@ -28,28 +28,39 @@ public class Map {
 	private void buildMap() {
 		
 		// Build du terrain
-		for(int j = 0; j <= WIDTH; j++){
-			for(int i = 0; i <= HEIGHT; i++){
-				if( j % 2 == 0 || i % 2 == 0)
+		for(int j = 1; j <= WIDTH-1; j++){
+			for(int i = 1; i <= HEIGHT-1; i++){
+				if( j % 2 == 1 || i % 2 == 1)
 					cells.add(new Cell(j, i, StateCell.BREAKABLE));
 				else
 					cells.add(new Cell(j, i, StateCell.UNBREAKABLE));				
 			}
 		}
 		
+		for (int j = 0; j <= WIDTH; j++){
+			cells.add(new Cell(j,0,StateCell.UNBREAKABLE));
+			cells.add(new Cell(j,HEIGHT,StateCell.UNBREAKABLE));
+		}
+		
+		for (int i = 1; i < HEIGHT; i++){
+			cells.add(new Cell(0,i,StateCell.UNBREAKABLE));
+			cells.add(new Cell(WIDTH, i, StateCell.UNBREAKABLE));
+		}
+		
+		
 		// Gestion cas particulier
-		getCell(0, 0).setState(StateCell.BROKE);
-		getCell(0, 0).takeBonus();
-		getCell(0, 1).setState(StateCell.BROKE);
-		getCell(0, 1).takeBonus();
-		getCell(1, 0).setState(StateCell.BROKE);
-		getCell(1, 0).takeBonus();
-		getCell(10, 10).setState(StateCell.BROKE);
-		getCell(10, 10).takeBonus();
-		getCell(10, 9).setState(StateCell.BROKE);
-		getCell(10, 9).takeBonus();
-		getCell(9, 10).setState(StateCell.BROKE);
-		getCell(9, 10).takeBonus();
+		getCell(1, 1).setState(StateCell.BROKE);
+		getCell(1, 1).takeBonus();
+		getCell(1, 2).setState(StateCell.BROKE);
+		getCell(1, 2).takeBonus();
+		getCell(2, 1).setState(StateCell.BROKE);
+		getCell(2, 1).takeBonus();
+		getCell(WIDTH-1, HEIGHT-1).setState(StateCell.BROKE);
+		getCell(WIDTH-1, HEIGHT-1).takeBonus();
+		getCell(WIDTH-1, HEIGHT-2).setState(StateCell.BROKE);
+		getCell(WIDTH-1, HEIGHT-2).takeBonus();
+		getCell(WIDTH-2, HEIGHT-1).setState(StateCell.BROKE);
+		getCell(WIDTH-2, HEIGHT-1).takeBonus();
 	}
 
 	public ArrayList<Cell> getCells() {

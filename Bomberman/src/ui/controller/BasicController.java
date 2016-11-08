@@ -3,6 +3,7 @@ package ui.controller;
 import java.awt.event.KeyEvent;
 
 import core.Bomb;
+import core.Cell;
 import core.Model;
 import core.Player;
 
@@ -17,29 +18,27 @@ public class BasicController extends PlayerController {
 
 	@Override
 	public void keyPressed(KeyEvent e){
-		if(e.getKeyCode() == keyboard.getKey(Action.UP)){
-			if(player.getY()-1 >= 0 && model.getMap().getCell(player.getX(), player.getY() -1).isBroke())
-				player.moveUp();
-			
+		Cell nextCell = null;
+		if(e.getKeyCode() == keyboard.getKey(Action.UP))
+			nextCell = model.getMap().getCell(player.getX(), player.getY()-1);
+		else if (e.getKeyCode() == keyboard.getKey(Action.DOWN))
+			nextCell = model.getMap().getCell(player.getX(), player.getY()+1);
+		else if (e.getKeyCode() == keyboard.getKey(Action.LEFT))
+			nextCell = model.getMap().getCell(player.getX()-1, player.getY());
+		else if (e.getKeyCode() == keyboard.getKey(Action.RIGHT))
+			nextCell = model.getMap().getCell(player.getX()+1, player.getY());
+		
+		if (nextCell != null && nextCell.isBroke()){
+			player.move(nextCell.getX(), nextCell.getY());
 		}
-		else if(e.getKeyCode() == keyboard.getKey(Action.DOWN)){
-			if(player.getY()+1 <= model.getMap().getHeight() && model.getMap().getCell(player.getX(), player.getY() +1).isBroke())
-				player.moveDown();
-		}
-		else if(e.getKeyCode() == keyboard.getKey(Action.LEFT)){
-			if(player.getX()-1 >= 0 && model.getMap().getCell(player.getX() -1, player.getY()).isBroke())
-				player.moveLeft();
-		}
-		else if(e.getKeyCode() == keyboard.getKey(Action.RIGHT)){
-			if(player.getX()+1 <= model.getMap().getWidth() && model.getMap().getCell(player.getX() +1, player.getY()).isBroke())
-				player.moveRight();
-		}
-		else if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
+		
+		if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
 			if (player.getBombStats().getDroppableBomb() > 0){
 				Bomb b = player.dropBomb();
 				b.start(player.getX(), player.getY(), player.getBombStats(), gview, model.getBombs());
 			}
 		}
+		
 		gview.repaint();
 	};
 }
