@@ -49,13 +49,11 @@ public class BasicDraftman implements BombermanVisitor	{
 			g2d.fillOval(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 		}
 	}
-	
+
 	@Override
 	public void visitPlayer(Player p) {
-		if(p.isALive()){
-			g2d.setColor(Color.RED);
-			g2d.fillOval(p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
-		}
+		g2d.setColor(Color.RED);
+		g2d.fillOval(p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 	}
-	
+
 }
