@@ -1,5 +1,8 @@
 package core;
 
+import ui.view.BasicDraftman;
+
+
 public class Cell {
 
 	private StateCell state;
@@ -63,5 +66,13 @@ public class Cell {
 
 	public void takeBonus() {
 		bonus = null;
+	}
+
+	public Bonus getBonus() {
+		return bonus;
+	}
+
+	public void accept(BasicDraftman basicDraftman) {
+		basicDraftman.visitCell(this);
 	}
 }

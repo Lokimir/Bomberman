@@ -31,33 +31,32 @@ public class BasicDraftman implements BombermanVisitor	{
 	@Override
 	public void visitMap(Map m) {		
 		for (Cell c: Map.getInstance().getCells()){
-
-			if (c.isBroke())
-				g2d.setColor(Color.WHITE);
-			else if (c.isBreakable())
-				g2d.setColor(Color.GRAY);				
-			else if (c.isExplosing())
-				g2d.setColor(Color.ORANGE);
-			else {
-				g2d.setColor(Color.BLACK);				
-			}
-			g2d.fillRect(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
-			
-			if(c.isBroke())
-				visitBonus(c);
+			c.accept(this);
 		}
 	}
-
+	
+	public void visitCell(Cell c){
+		if (c.isBroke())
+			g2d.setColor(Color.WHITE);
+		else if (c.isBreakable())
+			g2d.setColor(Color.GRAY);				
+		else if (c.isExplosing())
+			g2d.setColor(Color.ORANGE);
+		else {
+			g2d.setColor(Color.BLACK);				
+		}
+		g2d.fillRect(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+		
+		if(c.containBonus() && c.isBroke()){
+			g2d.setColor(Color.GREEN);
+			g2d.fillOval(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+		}
+	}
+	
 	@Override
 	public void visitPlayer(Player p) {
 		g2d.setColor(Color.RED);
 		g2d.fillOval(p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 	}
 	
-	public void visitBonus(Cell cell){
-		if(cell.containBonus()){
-			g2d.setColor(Color.GREEN);
-			g2d.fillOval(cell.getX()*CELL_SIZE_WIDTH, cell.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
-		}
-	}
 }
