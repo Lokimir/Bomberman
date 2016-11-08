@@ -6,8 +6,10 @@ import ui.view.BasicDraftman;
 
 public class Map {
 	
-	private final static int WIDTH = 10;
-	private final static int HEIGHT = 10;
+	// 2 row & columns are for walls
+	private final static int WIDTH = 12;
+	private final static int HEIGHT = 12;
+	
 	private ArrayList<Cell> cells;
 
 	private static Map map;
@@ -25,6 +27,7 @@ public class Map {
 	
 	private void buildMap() {
 		
+		// Build du terrain
 		for(int j = 0; j <= WIDTH; j++){
 			for(int i = 0; i <= HEIGHT; i++){
 				if( j % 2 == 0 || i % 2 == 0)
@@ -33,6 +36,8 @@ public class Map {
 					cells.add(new Cell(j, i, StateCell.UNBREAKABLE));				
 			}
 		}
+		
+		// Gestion cas particulier
 		getCell(0, 0).setState(StateCell.BROKE);
 		getCell(0, 0).takeBonus();
 		getCell(0, 1).setState(StateCell.BROKE);
