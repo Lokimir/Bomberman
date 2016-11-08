@@ -33,8 +33,8 @@ public class Bomberman extends JFrame {
 	public static void main(String[] args) {
 		Bomberman game = new Bomberman();
 		game.setResizable(false);
-		game.setLocationRelativeTo(null);
 		game.pack();
+		game.setLocationRelativeTo(null);
 		game.setVisible(true);
 	}
 }
