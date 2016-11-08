@@ -62,4 +62,8 @@ public class GameView extends JPanel {
 	public PlayerController getController(Player p){
 		return controllers.get(p);
 	}
+
+	public Map<Player,BasicController> getControllers() {
+		return controllers;
+	}
 }
