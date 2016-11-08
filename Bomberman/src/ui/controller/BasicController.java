@@ -3,6 +3,8 @@ package ui.controller;
 import java.awt.event.KeyEvent;
 
 import core.Bomb;
+import core.BombStats;
+import core.BombThread;
 import core.Cell;
 import core.Model;
 import core.Player;
@@ -34,8 +36,9 @@ public class BasicController extends PlayerController {
 		
 		if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
 			if (player.getBombStats().getDroppableBomb() > 0){
-				Bomb b = player.dropBomb();
-				b.start(player.getX(), player.getY(), player.getBombStats(), gview, model.getBombs());
+				Bomb bomb = new Bomb(player.getX(), player.getY(), new BombStats(player.getBombStats()));
+				BombThread thread = new BombThread(model, gview, player, bomb);
+				thread.start();
 			}
 		}
 		

@@ -10,7 +10,7 @@ public class Model {
 	private volatile ArrayList<Bomb> bombs;
 	
 	private Model(){
-		bombs = new ArrayList<Bomb>();
+		bombs = new ArrayList<>();
 		map = Map.getInstance();
 		players = new ArrayList<Player>(); 
 		players.add(new Player(1, 1));
@@ -38,7 +38,7 @@ public class Model {
 	public ArrayList<Bomb> getBombs(){
 		return bombs;
 	}
-
+	
 	public void removePlayer(Player player) {
 		players.remove((Player) player);
 	}

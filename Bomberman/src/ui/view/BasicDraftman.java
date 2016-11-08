@@ -20,9 +20,9 @@ public class BasicDraftman implements BombermanVisitor	{
 	}
 	
 	@Override
-	public void visitBomb(Bomb b) {
+	public void visitBomb(Bomb bomb) {
 		g2d.setColor(Color.BLUE);
-		g2d.drawOval(b.getX()*CELL_SIZE_WIDTH, b.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+		g2d.drawOval(bomb.getX()*CELL_SIZE_WIDTH, bomb.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 	}
 
 	@Override

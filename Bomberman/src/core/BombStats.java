@@ -19,6 +19,12 @@ public class BombStats {
 		this.droppableBomb = 2;
 	}
 	
+	public BombStats(BombStats bombStats) {
+		this.duration = bombStats.duration;
+		this.spread = bombStats.spread;
+		this.droppableBomb = bombStats.droppableBomb;
+	}
+
 	public int getSpread(){
 		return spread;
 	}

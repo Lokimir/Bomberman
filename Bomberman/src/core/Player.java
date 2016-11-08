@@ -25,10 +25,6 @@ public class Player {
 		return y;
 	}
 
-	public Bomb dropBomb(){
-		return new Bomb();
-	}
-
 	public void accept(BasicDraftman bd) {
 		bd.visitPlayer(this);
 	}
