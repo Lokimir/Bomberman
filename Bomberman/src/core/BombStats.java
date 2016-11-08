@@ -16,7 +16,7 @@ public class BombStats {
 	public BombStats(){
 		this.duration = 2000;
 		this.spread = 1;
-		this.droppableBomb = 2;
+		this.droppableBomb = 1;
 	}
 	
 	public BombStats(BombStats bombStats) {

@@ -60,6 +60,11 @@ public class Cell {
 		return (state == StateCell.EXPLOSING);
 	}
 
+	
+	public StateCell getState() {
+		return state;
+	}
+
 	public boolean containBonus() {
 		return (bonus != null);
 	}

@@ -32,6 +32,11 @@ public class BasicController extends PlayerController {
 		
 		if (nextCell != null && nextCell.isBroke()){
 			player.move(nextCell.getX(), nextCell.getY());
+			
+			if (nextCell.containBonus()){
+				nextCell.getBonus().apply(player.getBombStats());
+				nextCell.takeBonus();
+			}
 		}
 		
 		if(e.getKeyCode() == keyboard.getKey(Action.DROP)){

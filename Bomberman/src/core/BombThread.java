@@ -57,7 +57,7 @@ public class BombThread extends Thread {
 	private void explode(int x, int y, int spread){
 
 		if(spread > 0){
-			model.getMap().getCell(x, y).destroy();interrupt();
+			model.getMap().getCell(x, y).destroy();
 			ArrayList<Player> players = new ArrayList<Player>(gview.getModel().getPlayers());
 			for(Player p : players)
 				if(p.getX() == x && p.getY() == y){
@@ -65,8 +65,8 @@ public class BombThread extends Thread {
 					gview.removeKeyListener(gview.getController(p));
 					gview.getControllers().remove(p);
 				}
-			if(model.getMap().getCell(x, y).isBreakable())
-				if( x - bomb.getX() 	> 0 )
+			if(model.getMap().getCell(x, y).getState() != StateCell.UNBREAKABLE)
+				if( x - bomb.getX() > 0 )
 					explode( x + 1, y, spread - 1 );
 				else if( x - bomb.getX() < 0)
 					explode( x - 1, y, spread - 1 );
