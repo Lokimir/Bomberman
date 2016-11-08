@@ -55,4 +55,8 @@ public class Cell {
 	public boolean isExplosing() {
 		return (state == StateCell.EXPLOSING);
 	}
+
+	public boolean containBonus() {
+		return (bonus != null);
+	}
 }

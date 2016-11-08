@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import javax.swing.Box.Filler;
+
 import core.Bomb;
 import core.Cell;
 import core.Map;
@@ -36,11 +38,13 @@ public class BasicDraftman implements BombermanVisitor	{
 				g2d.setColor(Color.GRAY);				
 			else if (c.isExplosing())
 				g2d.setColor(Color.ORANGE);
-			else
-				g2d.setColor(Color.BLACK);
-
+			else {
+				g2d.setColor(Color.BLACK);				
+			}
 			g2d.fillRect(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
-
+			
+			if(c.isBroke())
+				visitBonus(c);
 		}
 	}
 
@@ -49,5 +53,11 @@ public class BasicDraftman implements BombermanVisitor	{
 		g2d.setColor(Color.RED);
 		g2d.fillOval(p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 	}
-
+	
+	public void visitBonus(Cell cell){
+		if(cell.containBonus()){
+			g2d.setColor(Color.GREEN);
+			g2d.fillOval(cell.getX()*CELL_SIZE_WIDTH, cell.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+		}
+	}
 }
