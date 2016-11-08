@@ -28,23 +28,19 @@ public class BasicDraftman implements BombermanVisitor	{
 
 	@Override
 	public void visitMap(Map m) {		
-		int i = 0;
-		for (ArrayList<Cell> lc: Map.getInstance().getCells()){
-			int j = 0;
-			for (Cell c : lc){
-				if (c.isBroke())
-					g2d.setColor(Color.WHITE);
-				else if (c.isBreakable())
-					g2d.setColor(Color.GRAY);				
-				else if (c.isExplosing())
-					g2d.setColor(Color.ORANGE);
-				else
-					g2d.setColor(Color.BLACK);
-				
-				g2d.fillRect(i*CELL_SIZE_WIDTH, j*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
-				j++;
-			}
-			i++;
+		for (Cell c: Map.getInstance().getCells()){
+
+			if (c.isBroke())
+				g2d.setColor(Color.WHITE);
+			else if (c.isBreakable())
+				g2d.setColor(Color.GRAY);				
+			else if (c.isExplosing())
+				g2d.setColor(Color.ORANGE);
+			else
+				g2d.setColor(Color.BLACK);
+
+			g2d.fillRect(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+
 		}
 	}
 

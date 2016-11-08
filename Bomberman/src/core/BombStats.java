@@ -45,6 +45,10 @@ public class BombStats {
 	public void decreaseBomb() {
 		droppableBomb--;
 	}
+
+	public void increaseSpread() {
+		spread++;
+	}
 	
 	
 }

@@ -8,14 +8,12 @@ public class Map {
 	
 	private final static int WIDTH = 10;
 	private final static int HEIGHT = 10;
-	private ArrayList<ArrayList<Cell>> cells;
+	private ArrayList<Cell> cells;
 
 	private static Map map;
 
 	private Map(){
-		//players = new ArrayList<>();
 		cells = new ArrayList<>();
-		
 		buildMap();
 	}
 	
@@ -29,38 +27,33 @@ public class Map {
 	private void buildMap() {
 		
 		for(int j = 0; j <= WIDTH; j++){
-			if( j % 2 == 0)
-				cells.add(buildCells());
-			else
-				cells.add(buildUDCells());
-		}
-		
+			for(int i = 0; i <= HEIGHT; i++){
+				if( j % 2 == 0 || i % 2 == 0)
+					cells.add(buildDestCell(j,i));
+				else
+					cells.add(buildUnDestCells(j,i));				
+			}
+		}	
 	}
 
-	private ArrayList<Cell> buildUDCells() {
-		ArrayList<Cell> cell2 = new ArrayList<>();
-		for(int i = 0; i <= HEIGHT; i++){
-			if( i % 2 == 0)
-				cell2.add(new Cell(StateCell.BREAKABLE));
-			else
-				cell2.add(new Cell(StateCell.UNBREAKABLE));
-		}
-		return cell2;
+	private Cell buildUnDestCells(int x, int y) {
+		return new Cell(x, y, StateCell.UNBREAKABLE);
 	}
 
-	private ArrayList<Cell> buildCells() {
-		ArrayList<Cell> cell1 = new ArrayList<>();
-		for(int i = 0; i <= HEIGHT; i++)
-			cell1.add(new Cell(StateCell.BREAKABLE));
-		return cell1;
+	private Cell buildDestCell(int x, int y) {
+		return new Cell(x, y, StateCell.BREAKABLE);
 	}
 
-	public ArrayList<ArrayList<Cell>> getCells() {
+	public ArrayList<Cell> getCells() {
 		return cells;
 	}
 
 	public Cell getCell(int x, int y){
-		return cells.get(x).get(y);
+		for(Cell c : cells){
+			if(c.getX() == x && c.getY() == y)
+				return c;
+		}
+		return null;
 	}
 	
 	public int getWidth() {
