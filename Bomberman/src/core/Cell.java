@@ -48,19 +48,6 @@ public class Cell {
 			state = StateCell.BROKE;
 	}
 
-	public boolean isBreakable() {
-		return (state == StateCell.BREAKABLE);
-	}
-
-	public boolean isBroke() {
-		return (state == StateCell.BROKE);
-	}
-
-	public boolean isExplosing() {
-		return (state == StateCell.EXPLOSING);
-	}
-
-	
 	public StateCell getState() {
 		return state;
 	}

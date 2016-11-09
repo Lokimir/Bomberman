@@ -7,6 +7,7 @@ import core.Bomb;
 import core.Cell;
 import core.Map;
 import core.Player;
+import core.StateCell;
 
 public class BasicDraftman implements BombermanVisitor	{
 	private Graphics2D g2d;
@@ -33,18 +34,18 @@ public class BasicDraftman implements BombermanVisitor	{
 	}
 	
 	public void visitCell(Cell c){
-		if (c.isBroke())
+		if (c.getState() == StateCell.BROKE)
 			g2d.setColor(Color.WHITE);
-		else if (c.isBreakable())
+		else if (c.getState() == StateCell.BREAKABLE)
 			g2d.setColor(Color.GRAY);				
-		else if (c.isExplosing())
+		else if (c.getState() == StateCell.EXPLOSING)
 			g2d.setColor(Color.ORANGE);
 		else {
 			g2d.setColor(Color.BLACK);				
 		}
 		g2d.fillRect(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 		
-		if(c.containBonus() && c.isBroke()){
+		if(c.containBonus() && c.getState() == StateCell.BROKE){
 			g2d.setColor(Color.GREEN);
 			g2d.fillOval(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 		}

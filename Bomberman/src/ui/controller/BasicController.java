@@ -7,6 +7,7 @@ import core.BombStats;
 import core.Cell;
 import core.Model;
 import core.Player;
+import core.StateCell;
 
 public class BasicController extends PlayerController {
 
@@ -29,7 +30,7 @@ public class BasicController extends PlayerController {
 		else if (e.getKeyCode() == keyboard.getKey(Action.RIGHT))
 			nextCell = model.getMap().getCell(player.getX()+1, player.getY());
 		
-		if (nextCell != null && nextCell.isBroke()){
+		if (nextCell != null && nextCell.getState() == StateCell.BROKE){
 			player.move(nextCell.getX(), nextCell.getY());
 			
 			if (nextCell.containBonus()){
