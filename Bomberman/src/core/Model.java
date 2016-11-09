@@ -43,4 +43,7 @@ public class Model {
 		players.remove((Player) player);
 	}
 
+	public boolean checkEndGame() {
+		return (players.size() < 2);
+	}
 }

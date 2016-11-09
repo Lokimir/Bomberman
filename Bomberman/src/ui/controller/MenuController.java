@@ -1,12 +1,18 @@
 package ui.controller;
 
+import java.awt.event.KeyEvent;
+
 import core.Model;
-import core.Player;
 
 public class MenuController extends BasicController {
 
 	public MenuController(Model model) {
 		super(model);
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e){
+		
 	}
 
 }

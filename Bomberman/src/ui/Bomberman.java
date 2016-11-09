@@ -3,13 +3,14 @@ package ui;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import core.Model;
 
 public class Bomberman extends JFrame {
 	
 	Model model;
-	GameView gview;
+	JPanel gview;
 	
 	public Bomberman(){
 		super("Bomberman");
@@ -29,9 +30,15 @@ public class Bomberman extends JFrame {
 		this.getContentPane().add(this.gview, java.awt.BorderLayout.CENTER);
 	}
 	
+
+	public void setGview(JPanel gview) {
+		this.gview = gview;
+	}
+
+	
 	public static void main(String[] args) {
 		Bomberman game = new Bomberman();
-	//	game.setResizable(false);
+		game.setResizable(false);
 		game.pack();
 		game.setLocationRelativeTo(null);
 		game.setVisible(true);
