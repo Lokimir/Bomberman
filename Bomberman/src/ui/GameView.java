@@ -9,11 +9,11 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import ui.controller.BasicController;
+import ui.controller.BombThread;
 import ui.controller.KeyBoardOptions;
 import ui.controller.PlayerController;
 import ui.view.BasicDraftman;
 import core.Bomb;
-import core.BombThread;
 import core.Model;
 import core.Player;
 

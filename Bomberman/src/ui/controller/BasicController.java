@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 
 import core.Bomb;
 import core.BombStats;
-import core.BombThread;
 import core.Cell;
 import core.Model;
 import core.Player;

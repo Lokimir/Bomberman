@@ -1,9 +1,14 @@
-package core;
+package ui.controller;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import core.Bomb;
+import core.BombStats;
+import core.Model;
+import core.Player;
+import core.StateCell;
 import ui.GameView;
 
 public class BombThread extends Thread {
