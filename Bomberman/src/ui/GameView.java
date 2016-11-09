@@ -8,10 +8,10 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import ui.controller.BasicController;
+import ui.controller.PlayerController;
 import ui.controller.BombThread;
 import ui.controller.KeyBoardOptions;
-import ui.controller.PlayerController;
+import ui.controller.BasicController;
 import ui.view.BasicDraftman;
 import core.Bomb;
 import core.Model;
@@ -20,14 +20,14 @@ import core.Player;
 public class GameView extends JPanel {
 
 	private Model model;
-	private Map<Player,BasicController> controllers;
+	private Map<Player,PlayerController> controllers;
 	
 	public GameView(Model model)
 	{
 		this.model = model;
 		this.controllers = new HashMap<>();
-		this.controllers.put(model.getPlayer(0),new BasicController(model, model.getPlayer(0), new KeyBoardOptions(KeyEvent.VK_Z,KeyEvent.VK_S,KeyEvent.VK_Q, KeyEvent.VK_D, KeyEvent.VK_SPACE)));
-		this.controllers.put(model.getPlayer(1),new BasicController(model, model.getPlayer(1), new KeyBoardOptions(KeyEvent.VK_UP,KeyEvent.VK_DOWN,KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER)));
+		this.controllers.put(model.getPlayer(0),new PlayerController(model, model.getPlayer(0), new KeyBoardOptions(KeyEvent.VK_Z,KeyEvent.VK_S,KeyEvent.VK_Q, KeyEvent.VK_D, KeyEvent.VK_SPACE)));
+		this.controllers.put(model.getPlayer(1),new PlayerController(model, model.getPlayer(1), new KeyBoardOptions(KeyEvent.VK_UP,KeyEvent.VK_DOWN,KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER)));
 		this.controllers.get(model.getPlayer(0)).setView(this);
 		this.controllers.get(model.getPlayer(1)).setView(this);
 		this.addKeyListener(this.controllers.get(model.getPlayer(0)));
@@ -60,11 +60,11 @@ public class GameView extends JPanel {
 		return model;
 	}
 	
-	public PlayerController getController(Player p){
+	public BasicController getController(Player p){
 		return controllers.get(p);
 	}
 
-	public Map<Player,BasicController> getControllers() {
+	public Map<Player,PlayerController> getControllers() {
 		return controllers;
 	}
 }
