@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ui.controller.MenuController;
 import core.Model;
 
 public class Bomberman extends JFrame {
