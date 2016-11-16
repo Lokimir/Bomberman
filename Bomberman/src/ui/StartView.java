@@ -73,13 +73,6 @@ public class StartView extends JPanel {
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		int winner = 0;
-		for(int i = 0; i < model.getPlayers().size(); i++)
-			if(model.getPlayer(i).isAlive()){
-				winner = ++i;
-				break;
-			}			
-			
 		this.message.setText("BOMBERMAN !");
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.clearRect(0, 0, 624, 624);
