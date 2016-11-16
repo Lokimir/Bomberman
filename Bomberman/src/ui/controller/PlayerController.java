@@ -1,12 +1,7 @@
 package ui.controller;
 
-import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
-import java.lang.Thread.State;
 
-import javax.swing.JPanel;
-
-import ui.Bomberman;
 import core.Bomb;
 import core.BombStats;
 import core.Cell;

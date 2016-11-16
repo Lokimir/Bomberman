@@ -14,19 +14,19 @@ import javax.swing.JTextArea;
 
 import core.Model;
 
-public class EndGameView extends JPanel {
+public class StartView extends JPanel {
 	
 	private final int BUTTON_SIZE_WIDTH = 100;
 	private final int BUTTON_SIZE_HEIGHT = 30;
 	
 	
 	private Model model;
-	private final Button restartButton;
+	private final Button newGameButton;
 	private final Button exitButton;
 	private final JTextArea message;
 	
 
-	public EndGameView(Model _model, JPanel cardPanel){
+	public StartView(Model _model, JPanel cardPanel){
 		this.setLayout(null);
 		this.model = _model;
 		this.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
@@ -37,8 +37,8 @@ public class EndGameView extends JPanel {
 		message.setBounds(624/2-40, 624/2-20,80 ,40);
 		
 		/* Ajout du bouton restart */
-		restartButton = new Button("Restart");
-		restartButton.addActionListener(new ActionListener() {
+		newGameButton = new Button("New Game");
+		newGameButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -51,8 +51,8 @@ public class EndGameView extends JPanel {
 					}
 			}
 		});
-		this.add(restartButton);
-		restartButton.setBounds(((model.getMap().getWidth()+1)*48-BUTTON_SIZE_WIDTH)/2, 500, BUTTON_SIZE_WIDTH, BUTTON_SIZE_HEIGHT);
+		this.add(newGameButton);
+		newGameButton.setBounds(((model.getMap().getWidth()+1)*48-BUTTON_SIZE_WIDTH)/2, 500, BUTTON_SIZE_WIDTH, BUTTON_SIZE_HEIGHT);
 		
 		/* ajout du bouton exit */
 		exitButton = new Button("Exit");
@@ -79,10 +79,8 @@ public class EndGameView extends JPanel {
 				winner = ++i;
 				break;
 			}			
-		if(winner != 0)
-			this.message.setText("Player "+ winner +" win !\nGood Job !");
-		else
-			this.message.setText("DRAW !");
+			
+		this.message.setText("BOMBERMAN !");
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.clearRect(0, 0, 624, 624);
 	}

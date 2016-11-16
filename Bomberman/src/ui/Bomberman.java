@@ -12,6 +12,7 @@ public class Bomberman extends JFrame {
 	
 	public final static String GAMEVIEW = "Gameview";
 	public final static String ENDGAMEVIEW = "EndGameview";
+	public static final String STARTVIEW = "Startview";
 	
 	private Model model;
 	private JPanel gview;
@@ -32,8 +33,9 @@ public class Bomberman extends JFrame {
 		this.gview = new JPanel(cd);
 		this.gview.add(new GameView(model,this.gview), GAMEVIEW);
 		this.gview.add(new EndGameView(model, this.gview), ENDGAMEVIEW);
+		this.gview.add(new StartView(model, this.gview), STARTVIEW);
 		this.gview.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
-		cd.show(this.gview, GAMEVIEW);
+		cd.show(this.gview, STARTVIEW);
 		this.getContentPane().add(this.gview, java.awt.BorderLayout.CENTER);
 	}
 

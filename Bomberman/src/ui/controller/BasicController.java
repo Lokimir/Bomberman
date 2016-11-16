@@ -3,9 +3,8 @@ package ui.controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import core.Model;
-import core.Player;
 import ui.GameView;
+import core.Model;
 
 public class BasicController implements KeyListener{
 	
