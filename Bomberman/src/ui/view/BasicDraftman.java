@@ -22,8 +22,15 @@ public class BasicDraftman implements BombermanVisitor	{
 	
 	@Override
 	public void visitBomb(Bomb bomb) {
+		if (!bomb.isExplosing()){
 		g2d.setColor(Color.BLUE);
 		g2d.drawOval(bomb.getX()*CELL_SIZE_WIDTH, bomb.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+		} else {
+			g2d.setColor(Color.ORANGE);
+			for (Cell c : bomb.getTargets()){
+				g2d.fillOval(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
+			}
+		}
 	}
 
 	@Override
@@ -37,9 +44,7 @@ public class BasicDraftman implements BombermanVisitor	{
 		if (c.getState() == StateCell.BROKE)
 			g2d.setColor(Color.WHITE);
 		else if (c.getState() == StateCell.BREAKABLE)
-			g2d.setColor(Color.GRAY);				
-		else if (c.getState() == StateCell.EXPLOSING)
-			g2d.setColor(Color.ORANGE);
+			g2d.setColor(Color.GRAY);	
 		else {
 			g2d.setColor(Color.BLACK);				
 		}

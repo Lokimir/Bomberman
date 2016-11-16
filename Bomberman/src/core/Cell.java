@@ -42,9 +42,7 @@ public class Cell {
 	}
 	
 	public void destroy(){
-		if(state == StateCell.BREAKABLE || state == StateCell.BROKE)
-			state = StateCell.EXPLOSING;
-		else if (state == StateCell.EXPLOSING)
+		if(state == StateCell.BREAKABLE)
 			state = StateCell.BROKE;
 	}
 

@@ -27,7 +27,7 @@ public class Model {
 		return map;
 	}
 	
-	public ArrayList<Player> getPlayers() {
+	public synchronized ArrayList<Player> getPlayers() {
 		return players;
 	}
 	
