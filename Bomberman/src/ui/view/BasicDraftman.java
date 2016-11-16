@@ -28,7 +28,7 @@ public class BasicDraftman implements BombermanVisitor	{
 
 	@Override
 	public void visitMap(Map m) {		
-		for (Cell c: Map.getInstance().getCells()){
+		for (Cell c: m.getCells()){
 			c.accept(this);
 		}
 	}

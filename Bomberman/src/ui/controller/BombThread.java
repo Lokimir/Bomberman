@@ -1,15 +1,19 @@
 package ui.controller;
 
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JPanel;
+
+import ui.Bomberman;
+import ui.GameView;
 import core.Bomb;
 import core.BombStats;
 import core.Model;
 import core.Player;
 import core.StateCell;
-import ui.GameView;
 
 public class BombThread extends Thread {
 
@@ -56,7 +60,9 @@ public class BombThread extends Thread {
 		explode(bomb.getX() + 1, bomb.getY(), bombStats.getSpread());
 		explode(bomb.getX(), bomb.getY() - 1, bombStats.getSpread());
 		explode(bomb.getX() - 1, bomb.getY(), bombStats.getSpread());
-		explode(bomb.getX(), bomb.getY() + 1, bombStats.getSpread());		
+		explode(bomb.getX(), bomb.getY() + 1, bombStats.getSpread());
+		if(model.isEndGame())
+			gview.switchEndGameView();
 	}
 
 	private void explode(int x, int y, int spread){
@@ -66,9 +72,7 @@ public class BombThread extends Thread {
 			ArrayList<Player> players = new ArrayList<Player>(gview.getModel().getPlayers());
 			for(Player p : players)
 				if(p.getX() == x && p.getY() == y){
-					gview.getModel().removePlayer(p);
-					gview.removeKeyListener(gview.getController(p));
-					gview.getControllers().remove(p);
+					model.removePlayer(p);
 				}
 			if(model.getMap().getCell(x, y).getState() != StateCell.UNBREAKABLE)
 				if( x - bomb.getX() > 0 )
@@ -78,7 +82,7 @@ public class BombThread extends Thread {
 				else if( y - bomb.getY() > 0)
 					explode( x, y + 1, spread - 1 );
 				else if( y - bomb.getY() < 0)
-					explode( x, y - 1 , spread - 1 );
+					explode( x, y - 1 , spread - 1 );	
 		}
 	}
 
