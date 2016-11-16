@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -9,8 +10,11 @@ import core.Model;
 
 public class Bomberman extends JFrame {
 	
-	Model model;
-	JPanel gview;
+	public final static String GAMEVIEW = "Gameview";
+	public final static String ENDGAMEVIEW = "EndGameview";
+	
+	private Model model;
+	private JPanel gview;
 	
 	public Bomberman(){
 		super("Bomberman");
@@ -23,19 +27,16 @@ public class Bomberman extends JFrame {
 			}
 		});
 		
-		model = Model.getInstance();
-		
-		this.gview = new GameView(this.model);
+		model = new Model();
+		CardLayout cd = new CardLayout();
+		this.gview = new JPanel(cd);
+		this.gview.add(new GameView(model,this.gview), GAMEVIEW);
+		this.gview.add(new EndGameView(model, this.gview), ENDGAMEVIEW);
 		this.gview.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
+		cd.show(this.gview, GAMEVIEW);
 		this.getContentPane().add(this.gview, java.awt.BorderLayout.CENTER);
 	}
-	
 
-	public void setGview(JPanel gview) {
-		this.gview = gview;
-	}
-
-	
 	public static void main(String[] args) {
 		Bomberman game = new Bomberman();
 		game.setResizable(false);

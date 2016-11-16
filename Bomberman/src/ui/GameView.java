@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.CardLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -20,9 +21,11 @@ public class GameView extends JPanel {
 
 	private Model model;
 	private Map<Player,PlayerController> controllers;
-	
-	public GameView(Model model)
+	private JPanel cardPanel;
+
+	public GameView(Model model, JPanel cardPanel)
 	{
+		this.cardPanel = cardPanel;
 		this.model = model;
 		this.controllers = new HashMap<>();
 		this.controllers.put(model.getPlayer(0),new PlayerController(model, model.getPlayer(0), new KeyBoardOptions(KeyEvent.VK_Z,KeyEvent.VK_S,KeyEvent.VK_Q, KeyEvent.VK_D, KeyEvent.VK_SPACE)));
@@ -31,7 +34,7 @@ public class GameView extends JPanel {
 		this.controllers.get(model.getPlayer(1)).setView(this);
 		this.addKeyListener(this.controllers.get(model.getPlayer(0)));
 		this.addKeyListener(this.controllers.get(model.getPlayer(1)));
-		
+
 		this.setFocusable(true);
 	}
 	
@@ -65,5 +68,9 @@ public class GameView extends JPanel {
 
 	public Map<Player,PlayerController> getControllers() {
 		return controllers;
+	}
+	
+	public void switchEndGameView(){
+		((CardLayout)cardPanel.getLayout()).show(cardPanel, Bomberman.ENDGAMEVIEW);
 	}
 }

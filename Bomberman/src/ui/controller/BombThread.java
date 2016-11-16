@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ui.GameView;
 import core.Bomb;
 import core.BombStats;
 import core.Cell;
 import core.Model;
 import core.Player;
 import core.StateCell;
-import ui.GameView;
 
 public class BombThread extends Thread {
 
@@ -54,17 +54,15 @@ public class BombThread extends Thread {
 		}, bombStats.getDuration());
 	}
 
-	
 	public void explode() {			
 		for (Cell c : bomb.getTargets()){
 			ArrayList<Player> players = new ArrayList<Player>(gview.getModel().getPlayers());
 			for(Player p : players)
 				if(p.getX() == c.getX() && p.getY() == c.getY()){
 					gview.getModel().removePlayer(p);
-					gview.removeKeyListener(gview.getController(p));
-					gview.getControllers().remove(p);
 				}
-			
+			if(model.isEndGame())
+				gview.switchEndGameView();
 			c.destroy();
 		}
 				

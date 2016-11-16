@@ -12,17 +12,9 @@ public class Map {
 	
 	private ArrayList<Cell> cells;
 
-	private static Map map;
-
-	private Map(){
+	public Map(){
 		cells = new ArrayList<>();
 		buildMap();
-	}
-	
-	public static Map getInstance(){
-		if(map == null)
-			map = new Map();
-		return map;
 	}
 	
 	private void buildMap() {

@@ -4,13 +4,23 @@ import ui.view.BasicDraftman;
 
 public class Player {
 	
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	private final int INITXVALUE;
+	private final int INITYVALUE;
 	private int x,y;
 	private BombStats bombStats;
+	private boolean isAlive;
 
 	public Player(int x, int y){
+		INITXVALUE = x;
+		INITYVALUE = y;
 		this.x = x;
 		this.y = y;
 		this.bombStats = new BombStats();
+		this.isAlive = true;
 	}
 
 	public int getX() {
@@ -32,5 +42,16 @@ public class Player {
 	public void move(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public void restore() {
+		this.x = INITXVALUE;
+		this.y = INITYVALUE;
+		this.bombStats = new BombStats();
+		this.isAlive = true;
+	}
+
+	public void die() {
+		isAlive = false;
 	}
 }
