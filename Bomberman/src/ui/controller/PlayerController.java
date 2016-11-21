@@ -31,24 +31,39 @@ public class PlayerController extends BasicController {
 			nextCell = model.getMap().getCell(player.getX()-1, player.getY());
 		else if (e.getKeyCode() == keyboard.getKey(Action.RIGHT))
 			nextCell = model.getMap().getCell(player.getX()+1, player.getY());
-		
-		if (nextCell != null && nextCell.getState() == StateCell.BROKE){
+
+		if (nextCell != null && nextCell.getState() == StateCell.BROKE && isAloneOnNextCell(nextCell)){
 			player.move(nextCell.getX(), nextCell.getY());
-			
+
 			if (nextCell.containBonus()){
 				nextCell.getBonus().apply(player.getBombStats());
 				nextCell.takeBonus();
 			}
 		}
-		
+
 		if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
 			if (player.getBombStats().getDroppableBomb() > 0){
 				Bomb bomb = new Bomb(player.getX(), player.getY(), new BombStats(player.getBombStats()));
+				for(Bomb b : model.getBombs()){
+					if(b.getX() == bomb.getX() && b.getY() == bomb.getY()){
+						return;
+					}
+				}
 				BombThread thread = new BombThread(model, gview, player, bomb);
-				thread.start();
+				thread.start();						
 			}
 		}
-		
+
 		gview.repaint();
+	}
+
+	private boolean isAloneOnNextCell(Cell cell) {
+		for(Player p : model.getPlayers())
+			if(p.getX() == cell.getX() && p.getY() == cell.getY())
+				return false;
+		for(Bomb b : model.getBombs())
+			if(b.getX() == cell.getX() && b.getY() == cell.getY())
+				return false;
+		return true;
 	};
 }
