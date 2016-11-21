@@ -1,16 +1,18 @@
 package ui.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ui.GameView;
 import core.Bomb;
 import core.BombStats;
 import core.Cell;
 import core.Model;
 import core.Player;
 import core.StateCell;
+import ui.GameView;
+import ui.view.Sprite;
 
 public class BombThread extends Thread {
 
@@ -33,6 +35,14 @@ public class BombThread extends Thread {
 		// Selection des cibles
 		this.getTarget(bomb.getX(), bomb.getY(), bomb.getBombStats().getSpread());
 		
+		try {
+			bomb.setCurrentSprite(new Sprite(bomb.getBombSprite(), bombStats.getDuration() - bombStats.getDuration()/10, bomb.getX(), bomb.getY()));
+			bomb.getCurrentSprite().setView(gview);
+			new Thread(bomb.getCurrentSprite()).start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		model.getBombs().add(bomb);
 		player.getBombStats().decreaseBomb();
 		
@@ -40,8 +50,8 @@ public class BombThread extends Thread {
 		t.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				explode();
-				gview.repaint();
+					explode();
+					gview.repaint();
 			}
 		}, bombStats.getDuration()-bombStats.getDuration()/10);
 
@@ -74,7 +84,8 @@ public class BombThread extends Thread {
 			Cell c = model.getMap().getCell(x, y);
 			if (c.getState() != StateCell.UNBREAKABLE){
 				bomb.getTargets().add(c);
-	
+			}
+			if (c.getState() == StateCell.BROKE){
 				if( x - bomb.getX() > 0 )
 					getTarget( x + 1, y, spread - 1 );
 				else if( x - bomb.getX() < 0)

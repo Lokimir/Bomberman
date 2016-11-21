@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

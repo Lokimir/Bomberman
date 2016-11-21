@@ -14,7 +14,7 @@ public class BombStats {
 	}
 	
 	public BombStats(){
-		this.duration = 2000;
+		this.duration = 1500;
 		this.spread = 1;
 		this.droppableBomb = 1;
 	}

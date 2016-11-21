@@ -2,7 +2,7 @@ package core;
 
 import java.util.ArrayList;
 
-import ui.view.BasicDraftman;
+import ui.view.BombermanVisitor;
 
 public class Map {
 	
@@ -75,7 +75,7 @@ public class Map {
 		return HEIGHT;
 	}
 
-	public void accept(BasicDraftman bd) {
-		bd.visitMap(this);
+	public void accept(BombermanVisitor bv) {
+		bv.visitMap(this);
 	}
 }
