@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,7 +35,6 @@ public class Bomberman extends JFrame {
 		this.gview.add(new GameView(model,this.gview), GAMEVIEW);
 		this.gview.add(new EndGameView(model, this.gview), ENDGAMEVIEW);
 		this.gview.add(new StartView(model, this.gview), STARTVIEW);
-		this.gview.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
 		cd.show(this.gview, STARTVIEW);
 		this.getContentPane().add(this.gview, java.awt.BorderLayout.CENTER);
 	}

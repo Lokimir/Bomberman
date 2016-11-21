@@ -4,23 +4,33 @@ import java.awt.CardLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import core.Bomb;
+import core.BonusBomb;
+import core.BonusSpread;
+import core.Cell;
+import core.Model;
+import core.Player;
 import ui.controller.BasicController;
 import ui.controller.KeyBoardOptions;
 import ui.controller.PlayerController;
 import ui.view.BasicDraftman;
-import core.Bomb;
-import core.Model;
-import core.Player;
+import ui.view.BombermanVisitor;
+import ui.view.SkinDraftman;
 
 public class GameView extends JPanel {
 
 	private Model model;
 	private Map<Player,PlayerController> controllers;
+
+	private boolean skinned;
 	private JPanel cardPanel;
 
 	public GameView(Model model, JPanel cardPanel)
@@ -36,25 +46,52 @@ public class GameView extends JPanel {
 		this.addKeyListener(this.controllers.get(model.getPlayer(1)));
 
 		this.setFocusable(true);
+
+		try {
+			this.setSkins();
+			skinned = true;
+		} catch (IOException e) {
+			System.out.println("Skin manquant !");
+			skinned = false;
+		}
 	}
 	
+	private void setSkins() throws IOException {
+		String skinURL = "res" + File.separatorChar + "sprites" + File.separatorChar;
+		Bomb.setBombSprite(ImageIO.read(new File(skinURL + "bomb.png")));
+		Bomb.setExplosionSprite(ImageIO.read(new File(skinURL + "explosion.png")));
+		Cell.unbreakableSprite = ImageIO.read(new File(skinURL + "unbreakable.png"));
+		Cell.breakableSprite = ImageIO.read(new File(skinURL + "breakable.png"));	
+		Cell.floorSprite = ImageIO.read(new File(skinURL + "floor.png"));
+		Player.playerSprite = ImageIO.read(new File(skinURL + "player1.png"));
+		BonusBomb.setSprite(ImageIO.read(new File(skinURL + "bonusBomb.png")));
+		BonusSpread.setSprite(ImageIO.read(new File(skinURL + "bonusSpread.png")));
+	}
+
 	@Override
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		
-		BasicDraftman bd = new BasicDraftman();
-		bd.setGraphics(g2d);
+		super.paintComponent(g2d);
 		
-		this.model.getMap().accept(bd);
+		BombermanVisitor draftman;
+		if (skinned){
+			draftman = new SkinDraftman();
+		} else
+			draftman = new BasicDraftman();
+		
+		draftman.setGraphics(g2d);
+		
+		this.model.getMap().accept(draftman);
 		
 		for (Bomb b : this.model.getBombs())
 		{
-			b.accept(bd);
+			b.accept(draftman);
 		}
 		
 		for (Player p : this.model.getPlayers())
 		{
-			p.accept(bd);
+			p.accept(draftman);
 		}
 	}
 	

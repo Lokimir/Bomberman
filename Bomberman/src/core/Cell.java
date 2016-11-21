@@ -1,10 +1,16 @@
 package core;
 
-import ui.view.BasicDraftman;
+import java.awt.image.BufferedImage;
+
+import ui.view.BombermanVisitor;
 
 
 public class Cell {
 
+	public static BufferedImage unbreakableSprite;
+	public static BufferedImage floorSprite;
+	public static BufferedImage breakableSprite;
+	
 	private StateCell state;
 	private Bonus bonus;
 	private int x, y;
@@ -62,7 +68,7 @@ public class Cell {
 		return bonus;
 	}
 
-	public void accept(BasicDraftman basicDraftman) {
-		basicDraftman.visitCell(this);
+	public void accept(BombermanVisitor bv) {
+		bv.visitCell(this);
 	}
 }

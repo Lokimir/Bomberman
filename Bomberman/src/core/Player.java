@@ -1,8 +1,13 @@
 package core;
 
+import java.awt.image.BufferedImage;
+
 import ui.view.BasicDraftman;
+import ui.view.BombermanVisitor;
 
 public class Player {
+	
+	public static BufferedImage playerSprite;
 	
 	public boolean isAlive() {
 		return isAlive;
@@ -35,8 +40,8 @@ public class Player {
 		return y;
 	}
 
-	public void accept(BasicDraftman bd) {
-		bd.visitPlayer(this);
+	public void accept(BombermanVisitor bv) {
+		bv.visitPlayer(this);
 	}
 
 	public void move(int x, int y) {

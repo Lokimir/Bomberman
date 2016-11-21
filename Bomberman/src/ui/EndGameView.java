@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import core.Model;
 
 public class EndGameView extends JPanel {
-	
+
 	private final int BUTTON_SIZE_WIDTH = 100;
 	private final int BUTTON_SIZE_HEIGHT = 30;
 	
