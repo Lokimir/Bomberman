@@ -12,18 +12,18 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import core.Bomb;
-import core.BonusBomb;
-import core.BonusSpread;
-import core.Cell;
-import core.Model;
-import core.Player;
 import ui.controller.BasicController;
 import ui.controller.KeyBoardOptions;
 import ui.controller.PlayerController;
 import ui.view.BasicDraftman;
 import ui.view.BombermanVisitor;
 import ui.view.SkinDraftman;
+import core.Bomb;
+import core.BonusBomb;
+import core.BonusSpread;
+import core.Cell;
+import core.Model;
+import core.Player;
 
 public class GameView extends JPanel {
 
