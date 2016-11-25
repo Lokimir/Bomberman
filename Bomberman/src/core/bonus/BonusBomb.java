@@ -1,6 +1,8 @@
-package core;
+package core.bonus;
 
 import java.awt.image.BufferedImage;
+
+import core.BombStats;
 
 public class BonusBomb extends Bonus {
 	

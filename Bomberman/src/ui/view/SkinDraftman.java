@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import core.Bomb;
-import core.Cell;
 import core.Map;
 import core.Player;
-import core.StateCell;
+import core.cell.Cell;
 
 public class SkinDraftman implements BombermanVisitor {
 
@@ -43,15 +42,8 @@ public class SkinDraftman implements BombermanVisitor {
 
 	@Override
 	public void visitCell(Cell c) {
-		if (c.getState() == StateCell.BROKE)
-			g2d.drawImage(Cell.floorSprite, c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, null);	
-		else if (c.getState() == StateCell.BREAKABLE)
-			g2d.drawImage(Cell.breakableSprite, c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, null);		
-		else {
-			g2d.drawImage(Cell.unbreakableSprite, c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, null);			
-		}
-
-		if(c.containBonus() && c.getState() == StateCell.BROKE){
+		g2d.drawImage(c.getSprite(), c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, null);
+		if(c.containBonus() && c.isWalkable()){
 			g2d.drawImage(c.getBonus().getSprite(), c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, null);			
 		}
 	}

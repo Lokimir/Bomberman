@@ -2,6 +2,10 @@ package core;
 
 import java.util.ArrayList;
 
+import core.cell.BreakableCell;
+import core.cell.Cell;
+import core.cell.FloorCell;
+import core.cell.UnbreakableCell;
 import ui.view.BombermanVisitor;
 
 public class Map {
@@ -22,37 +26,28 @@ public class Map {
 		// Build du terrain
 		for(int j = 1; j <= WIDTH-1; j++){
 			for(int i = 1; i <= HEIGHT-1; i++){
-				if( j % 2 == 1 || i % 2 == 1)
-					cells.add(new Cell(j, i, StateCell.BREAKABLE));
+				if( j % 2 == 1 || i % 2 == 1){
+					if((i == 1 || j == 1) && Math.abs(i - j) <= 1)
+						cells.add(new FloorCell(j, i));
+					else if((i == WIDTH-1 || j == HEIGHT-1) && Math.abs(i - j) <= 1)
+						cells.add(new FloorCell(j, i));
+					else
+						cells.add(new BreakableCell(j, i));
+				}
 				else
-					cells.add(new Cell(j, i, StateCell.UNBREAKABLE));				
+					cells.add(new UnbreakableCell(j, i));				
 			}
 		}
 		
 		for (int j = 0; j <= WIDTH; j++){
-			cells.add(new Cell(j,0,StateCell.UNBREAKABLE));
-			cells.add(new Cell(j,HEIGHT,StateCell.UNBREAKABLE));
+			cells.add(new UnbreakableCell(j,0));
+			cells.add(new UnbreakableCell(j,HEIGHT));
 		}
 		
 		for (int i = 1; i < HEIGHT; i++){
-			cells.add(new Cell(0,i,StateCell.UNBREAKABLE));
-			cells.add(new Cell(WIDTH, i, StateCell.UNBREAKABLE));
+			cells.add(new UnbreakableCell(0,i));
+			cells.add(new UnbreakableCell(WIDTH, i));
 		}
-		
-		
-		// Gestion cas particulier
-		getCell(1, 1).setState(StateCell.BROKE);
-		getCell(1, 1).takeBonus();
-		getCell(1, 2).setState(StateCell.BROKE);
-		getCell(1, 2).takeBonus();
-		getCell(2, 1).setState(StateCell.BROKE);
-		getCell(2, 1).takeBonus();
-		getCell(WIDTH-1, HEIGHT-1).setState(StateCell.BROKE);
-		getCell(WIDTH-1, HEIGHT-1).takeBonus();
-		getCell(WIDTH-1, HEIGHT-2).setState(StateCell.BROKE);
-		getCell(WIDTH-1, HEIGHT-2).takeBonus();
-		getCell(WIDTH-2, HEIGHT-1).setState(StateCell.BROKE);
-		getCell(WIDTH-2, HEIGHT-1).takeBonus();
 	}
 
 	public ArrayList<Cell> getCells() {
@@ -77,5 +72,11 @@ public class Map {
 
 	public void accept(BombermanVisitor bv) {
 		bv.visitMap(this);
+	}
+	
+	public void setCell(Cell cell){
+		Cell nextCell = cell.nextState();
+		cells.remove(cell);
+		cells.add(nextCell);
 	}
 }

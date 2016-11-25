@@ -1,18 +1,12 @@
 package ui.controller;
 
-import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
-import java.lang.Thread.State;
 
-import javax.swing.JPanel;
-
-import ui.Bomberman;
 import core.Bomb;
 import core.BombStats;
-import core.Cell;
 import core.Model;
 import core.Player;
-import core.StateCell;
+import core.cell.Cell;
 
 public class PlayerController extends BasicController {
 
@@ -36,16 +30,14 @@ public class PlayerController extends BasicController {
 			nextCell = model.getMap().getCell(player.getX()-1, player.getY());
 		else if (e.getKeyCode() == keyboard.getKey(Action.RIGHT))
 			nextCell = model.getMap().getCell(player.getX()+1, player.getY());
-
-		if (nextCell != null && nextCell.getState() == StateCell.BROKE && isAloneOnNextCell(nextCell)){
-			player.move(nextCell.getX(), nextCell.getY());
-
-			if (nextCell.containBonus()){
-				nextCell.getBonus().apply(player.getBombStats());
-				nextCell.takeBonus();
+		if(nextCell != null){
+			if (nextCell.isWalkable() && isAloneOnNextCell(nextCell)){
+				player.move(nextCell.getX(), nextCell.getY());
+				if (nextCell.containBonus()){
+					nextCell.takeBonus().apply(player.getBombStats());
+				}
 			}
 		}
-
 		if(e.getKeyCode() == keyboard.getKey(Action.DROP)){
 			if (player.getBombStats().getDroppableBomb() > 0){
 				Bomb bomb = new Bomb(player.getX(), player.getY(), new BombStats(player.getBombStats()));
@@ -58,7 +50,6 @@ public class PlayerController extends BasicController {
 				thread.start();						
 			}
 		}
-
 		gview.repaint();
 	}
 

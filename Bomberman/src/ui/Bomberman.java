@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import core.Model;
+import core.cell.Cell;
 
 public class Bomberman extends JFrame {
 	
@@ -37,6 +38,7 @@ public class Bomberman extends JFrame {
 		this.gview.add(new StartView(model, this.gview), STARTVIEW);
 		cd.show(this.gview, STARTVIEW);
 		this.getContentPane().add(this.gview, java.awt.BorderLayout.CENTER);
+		this.repaint();
 	}
 
 	public static void main(String[] args) {

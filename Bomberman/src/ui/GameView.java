@@ -19,11 +19,13 @@ import ui.view.BasicDraftman;
 import ui.view.BombermanVisitor;
 import ui.view.SkinDraftman;
 import core.Bomb;
-import core.BonusBomb;
-import core.BonusSpread;
-import core.Cell;
 import core.Model;
 import core.Player;
+import core.bonus.BonusBomb;
+import core.bonus.BonusSpread;
+import core.cell.BreakableCell;
+import core.cell.FloorCell;
+import core.cell.UnbreakableCell;
 
 public class GameView extends JPanel {
 
@@ -60,9 +62,9 @@ public class GameView extends JPanel {
 		String skinURL = "res" + File.separatorChar + "sprites" + File.separatorChar;
 		Bomb.setBombSprite(ImageIO.read(new File(skinURL + "bomb.png")));
 		Bomb.setExplosionSprite(ImageIO.read(new File(skinURL + "explosion.png")));
-		Cell.unbreakableSprite = ImageIO.read(new File(skinURL + "unbreakable.png"));
-		Cell.breakableSprite = ImageIO.read(new File(skinURL + "breakable.png"));	
-		Cell.floorSprite = ImageIO.read(new File(skinURL + "floor.png"));
+		UnbreakableCell.setSprite(ImageIO.read(new File(skinURL + "unbreakable.png")));
+		BreakableCell.setSprite(ImageIO.read(new File(skinURL + "breakable.png")));	
+		FloorCell.setSprite(ImageIO.read(new File(skinURL + "floor.png")));
 		Player.playerSprite = ImageIO.read(new File(skinURL + "player1.png"));
 		BonusBomb.setSprite(ImageIO.read(new File(skinURL + "bonusBomb.png")));
 		BonusSpread.setSprite(ImageIO.read(new File(skinURL + "bonusSpread.png")));

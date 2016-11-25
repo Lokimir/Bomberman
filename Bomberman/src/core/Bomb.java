@@ -3,6 +3,7 @@ package core;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import core.cell.Cell;
 import ui.view.BasicDraftman;
 import ui.view.BombermanVisitor;
 import ui.view.Sprite;

@@ -4,10 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import core.Bomb;
-import core.Cell;
 import core.Map;
 import core.Player;
-import core.StateCell;
+import core.cell.BreakableCell;
+import core.cell.Cell;
+import core.cell.FloorCell;
 
 public class BasicDraftman implements BombermanVisitor	{
 	private Graphics2D g2d;
@@ -41,16 +42,16 @@ public class BasicDraftman implements BombermanVisitor	{
 	}
 
 	public void visitCell(Cell c){
-		if (c.getState() == StateCell.BROKE)
+		if (c.getClass() == FloorCell.class)
 			g2d.setColor(Color.WHITE);
-		else if (c.getState() == StateCell.BREAKABLE)
+		else if (c.getClass() == BreakableCell.class)
 			g2d.setColor(Color.GRAY);	
 		else {
 			g2d.setColor(Color.BLACK);				
 		}
 		g2d.fillRect(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 
-		if(c.containBonus() && c.getState() == StateCell.BROKE){
+		if(c.containBonus() && c.isWalkable()){
 			g2d.setColor(Color.GREEN);
 			g2d.fillOval(c.getX()*CELL_SIZE_WIDTH, c.getY()*CELL_SIZE_HEIGHT, CELL_SIZE_WIDTH, CELL_SIZE_HEIGHT);
 		}

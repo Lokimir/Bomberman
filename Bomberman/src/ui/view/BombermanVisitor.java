@@ -3,9 +3,9 @@ package ui.view;
 import java.awt.Graphics2D;
 
 import core.Bomb;
-import core.Cell;
 import core.Map;
 import core.Player;
+import core.cell.Cell;
 
 public interface BombermanVisitor {
 	

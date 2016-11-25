@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import core.Bomb;
-import core.BombStats;
-import core.Cell;
-import core.Model;
-import core.Player;
-import core.StateCell;
 import ui.GameView;
 import ui.view.Sprite;
+import core.Bomb;
+import core.BombStats;
+import core.Model;
+import core.Player;
+import core.cell.Cell;
+import core.cell.FloorCell;
+import core.cell.UnbreakableCell;
 
 public class BombThread extends Thread {
 
@@ -73,19 +74,23 @@ public class BombThread extends Thread {
 				}
 			if(model.isEndGame())
 				gview.switchEndGameView();
-			c.destroy();
+			destroy(c);
 		}
 				
 		bomb.explode();
 	}
 
+	private void destroy(Cell cell) {
+		model.getMap().setCell(cell);
+	}
+
 	private void getTarget(int x, int y, int spread){
 		if(spread >= 0){
 			Cell c = model.getMap().getCell(x, y);
-			if (c.getState() != StateCell.UNBREAKABLE){
+			if (c.getClass() != UnbreakableCell.class){
 				bomb.getTargets().add(c);
 			}
-			if (c.getState() == StateCell.BROKE){
+			if (c.getClass() == FloorCell.class){
 				if( x - bomb.getX() > 0 )
 					getTarget( x + 1, y, spread - 1 );
 				else if( x - bomb.getX() < 0)

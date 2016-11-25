@@ -42,7 +42,6 @@ public class StartView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				model.restore();
 				((CardLayout) cardPanel.getLayout()).show(cardPanel, Bomberman.GAMEVIEW);
 				for(Component comp : cardPanel.getComponents())
 					if(comp.getClass() == GameView.class){
