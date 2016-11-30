@@ -36,7 +36,15 @@ public abstract class Cell {
 	public int getY() {
 		return y;
 	}
-
+	
+	public Bonus getBonus() {
+		return this.bonus;
+	}
+	
+	/**return a random bonus in the cell
+	 * return null if they have no bonus in the cell
+	 * @return Bonus
+	 */
 	private Bonus randomBonus() {
 		Bonus bonus;
 		double percent = Math.random()*100;
@@ -53,17 +61,11 @@ public abstract class Cell {
 		return (bonus != null);
 	}
 
-	public Bonus takeBonus() {
-		Bonus _bonus = bonus;
+	public void removeBonus() {
 		bonus = null;
-		return _bonus;
 	}
 	
 	public void accept(BombermanVisitor bv) {
 		bv.visitCell(this);
-	}
-
-	public Bonus getBonus() {
-		return this.bonus;
 	}
 }

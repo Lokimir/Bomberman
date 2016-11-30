@@ -33,7 +33,7 @@ public class BombThread extends Thread {
 	public void run() {
 		BombStats bombStats = bomb.getBombStats();
 		
-		// Selection des cibles
+		// Select targets
 		this.getTarget(bomb.getX(), bomb.getY(), bomb.getBombStats().getSpread());
 		
 		try {
@@ -81,7 +81,9 @@ public class BombThread extends Thread {
 	}
 
 	private void destroy(Cell cell) {
-		model.getMap().setCell(cell);
+		Cell nextCell = cell.nextState();
+		model.getMap().getCells().remove(cell);
+		model.getMap().getCells().add(nextCell);
 	}
 
 	private void getTarget(int x, int y, int spread){

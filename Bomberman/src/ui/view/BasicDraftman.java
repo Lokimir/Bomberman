@@ -11,6 +11,7 @@ import core.cell.Cell;
 import core.cell.FloorCell;
 
 public class BasicDraftman implements BombermanVisitor	{
+	
 	private Graphics2D g2d;
 
 	private final int CELL_SIZE_WIDTH = 48;

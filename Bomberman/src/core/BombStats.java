@@ -54,7 +54,5 @@ public class BombStats {
 
 	public void increaseSpread() {
 		spread++;
-	}
-	
-	
+	}	
 }

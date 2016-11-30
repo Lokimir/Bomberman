@@ -44,10 +44,10 @@ public class Model {
 		return (alive < 2);
 	}
 
-	public void restore() {
+	public void restoreModel() {
 		bombs = new ArrayList<>();
 		map = new Map();
 		for(Player p : players)
-			p.restore();
+			p.restorePlayer();
 	}
 }

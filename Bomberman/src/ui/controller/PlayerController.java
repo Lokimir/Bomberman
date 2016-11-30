@@ -21,6 +21,7 @@ public class PlayerController extends BasicController {
 
 	@Override
 	public void keyPressed(KeyEvent e){
+		//get the next cell when moving
 		Cell nextCell = null;
 		if(e.getKeyCode() == keyboard.getKey(Action.UP))
 			nextCell = model.getMap().getCell(player.getX(), player.getY()-1);
@@ -34,7 +35,8 @@ public class PlayerController extends BasicController {
 			if (nextCell.isWalkable() && isAloneOnNextCell(nextCell)){
 				player.move(nextCell.getX(), nextCell.getY());
 				if (nextCell.containBonus()){
-					nextCell.takeBonus().apply(player.getBombStats());
+					nextCell.getBonus().apply(player.getBombStats());
+					nextCell.removeBonus();
 				}
 			}
 		}
@@ -52,7 +54,12 @@ public class PlayerController extends BasicController {
 		}
 		gview.repaint();
 	}
-
+	
+	/**verify if there is nothing on the cell (you can't move on a bomb or another player)
+	 * 	
+	 * @param cell
+	 * @return boolean
+	 */
 	private boolean isAloneOnNextCell(Cell cell) {
 		for(Player p : model.getPlayers())
 			if(p.getX() == cell.getX() && p.getY() == cell.getY())

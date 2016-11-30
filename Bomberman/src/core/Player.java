@@ -2,32 +2,32 @@ package core;
 
 import java.awt.image.BufferedImage;
 
-import ui.view.BasicDraftman;
 import ui.view.BombermanVisitor;
 
 public class Player {
 	
 	public static BufferedImage playerSprite;
 	
-	public boolean isAlive() {
-		return isAlive;
-	}
-
-	private final int INITXVALUE;
-	private final int INITYVALUE;
+	private final int INIT_X_VALUE;
+	private final int INIT_Y_VALUE;
+	
 	private int x,y;
 	private BombStats bombStats;
 	private boolean isAlive;
 
 	public Player(int x, int y){
-		INITXVALUE = x;
-		INITYVALUE = y;
+		INIT_X_VALUE = x;
+		INIT_Y_VALUE = y;
 		this.x = x;
 		this.y = y;
 		this.bombStats = new BombStats();
 		this.isAlive = true;
 	}
 
+	public boolean isAlive() {
+		return isAlive;
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -49,9 +49,9 @@ public class Player {
 		this.y = y;
 	}
 
-	public void restore() {
-		this.x = INITXVALUE;
-		this.y = INITYVALUE;
+	public void restorePlayer() {
+		this.x = INIT_X_VALUE;
+		this.y = INIT_Y_VALUE;
 		this.bombStats = new BombStats();
 		this.isAlive = true;
 	}

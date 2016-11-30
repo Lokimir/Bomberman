@@ -10,7 +10,7 @@ import ui.view.BombermanVisitor;
 
 public class Map {
 	
-	// 2 row & columns are for walls
+	// 2 rows & columns are for the surrounding walls
 	private final static int WIDTH = 12;
 	private final static int HEIGHT = 12;
 	
@@ -23,8 +23,8 @@ public class Map {
 	
 	private void buildMap() {
 		
-		// Build du terrain
-		for(int j = 1; j <= WIDTH-1; j++){
+		// Build the playable map
+		for(int j = 1; j <= WIDTH-1; j++){	
 			for(int i = 1; i <= HEIGHT-1; i++){
 				if( j % 2 == 1 || i % 2 == 1){
 					if((i == 1 || j == 1) && Math.abs(i - j) <= 1)
@@ -39,11 +39,12 @@ public class Map {
 			}
 		}
 		
+		// Build the surrounding walls
 		for (int j = 0; j <= WIDTH; j++){
 			cells.add(new UnbreakableCell(j,0));
 			cells.add(new UnbreakableCell(j,HEIGHT));
 		}
-		
+		// Build the surrounding walls
 		for (int i = 1; i < HEIGHT; i++){
 			cells.add(new UnbreakableCell(0,i));
 			cells.add(new UnbreakableCell(WIDTH, i));
@@ -72,11 +73,5 @@ public class Map {
 
 	public void accept(BombermanVisitor bv) {
 		bv.visitMap(this);
-	}
-	
-	public void setCell(Cell cell){
-		Cell nextCell = cell.nextState();
-		cells.remove(cell);
-		cells.add(nextCell);
 	}
 }

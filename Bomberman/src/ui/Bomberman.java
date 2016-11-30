@@ -1,14 +1,11 @@
 package ui;
 
 import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import core.Model;
-import core.cell.Cell;
 
 public class Bomberman extends JFrame {
 	
