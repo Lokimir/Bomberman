@@ -6,11 +6,13 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.FontRenderContext;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import core.Model;
 
@@ -23,7 +25,7 @@ public class EndGameView extends JPanel {
 	private Model model;
 	private final Button restartButton;
 	private final Button exitButton;
-	private final JTextArea message;
+	private final JLabel message;
 	
 
 	public EndGameView(Model _model, JPanel cardPanel){
@@ -32,7 +34,7 @@ public class EndGameView extends JPanel {
 		this.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
 		
 		/* Ajout du message de fin de partie */
-		this.message = new JTextArea();
+		this.message = new JLabel();
 		this.add(message);
 		message.setBounds(624/2-40, 624/2-20,80 ,40);
 		
@@ -80,9 +82,14 @@ public class EndGameView extends JPanel {
 				break;
 			}			
 		if(winner != 0)
-			this.message.setText("Player "+ winner +" win !\nGood Job !");
+			this.message.setText("Player "+ winner +" win ! Good Job !");
 		else
 			this.message.setText("DRAW !");
+		FontRenderContext frc= StartView.DEFAULT_GRAPHICS.getFontRenderContext();
+		int width=(int)this.message.getFont().getStringBounds(message.getText(), frc).getWidth();
+		int height=(int)this.message.getFont().getStringBounds(message.getText(), frc).getHeight();
+		Rectangle rectangle = new Rectangle((624-width)/2,(624-height)/2,width,height);
+		message.setBounds(rectangle);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.clearRect(0, 0, 624, 624);
 	}

@@ -6,11 +6,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.image.BufferedImage;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import core.Model;
 
@@ -18,12 +21,13 @@ public class StartView extends JPanel {
 	
 	private final int BUTTON_SIZE_WIDTH = 100;
 	private final int BUTTON_SIZE_HEIGHT = 30;
+	public static final Graphics2D DEFAULT_GRAPHICS = (Graphics2D) new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB).getGraphics();
 	
 	
 	private Model model;
 	private final Button newGameButton;
 	private final Button exitButton;
-	private final JTextArea message;
+	private final JLabel message;
 	
 
 	public StartView(Model _model, JPanel cardPanel){
@@ -32,9 +36,14 @@ public class StartView extends JPanel {
 		this.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
 		
 		/* Ajout du message de fin de partie */
-		this.message = new JTextArea();
+		this.message = new JLabel();
+		this.message.setText("BOMBERMAN !");
 		this.add(message);
-		message.setBounds(624/2-40, 624/2-20,80 ,40);
+		FontRenderContext frc= DEFAULT_GRAPHICS.getFontRenderContext();
+		int width=(int)this.message.getFont().getStringBounds(message.getText(), frc).getWidth();
+		int height=(int)this.message.getFont().getStringBounds(message.getText(), frc).getHeight();
+		Rectangle rectangle = new Rectangle((624-width)/2,(624-height)/2,width,height);
+		message.setBounds(rectangle);
 		
 		/* Ajout du bouton restart */
 		newGameButton = new Button("New Game");
@@ -72,7 +81,6 @@ public class StartView extends JPanel {
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		this.message.setText("BOMBERMAN !");
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.clearRect(0, 0, 624, 624);
 	}
