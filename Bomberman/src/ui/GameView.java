@@ -6,8 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -30,7 +28,6 @@ import core.cell.UnbreakableCell;
 public class GameView extends JPanel {
 
 	private Model model;
-	private Map<Player,PlayerController> controllers;
 
 	private boolean skinned;
 	private JPanel cardPanel;
@@ -39,13 +36,12 @@ public class GameView extends JPanel {
 	{
 		this.cardPanel = cardPanel;
 		this.model = model;
-		this.controllers = new HashMap<>();
-		this.controllers.put(model.getPlayer(0),new PlayerController(model, model.getPlayer(0), new KeyBoardOptions(KeyEvent.VK_Z,KeyEvent.VK_S,KeyEvent.VK_Q, KeyEvent.VK_D, KeyEvent.VK_SPACE)));
-		this.controllers.put(model.getPlayer(1),new PlayerController(model, model.getPlayer(1), new KeyBoardOptions(KeyEvent.VK_UP,KeyEvent.VK_DOWN,KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER)));
-		this.controllers.get(model.getPlayer(0)).setView(this);
-		this.controllers.get(model.getPlayer(1)).setView(this);
-		this.addKeyListener(this.controllers.get(model.getPlayer(0)));
-		this.addKeyListener(this.controllers.get(model.getPlayer(1)));
+		BasicController controller = new PlayerController(model, model.getPlayer(0), new KeyBoardOptions(KeyEvent.VK_Z,KeyEvent.VK_S,KeyEvent.VK_Q, KeyEvent.VK_D, KeyEvent.VK_SPACE));
+		controller.setView(this);
+		this.addKeyListener(controller);
+		controller = new PlayerController(model, model.getPlayer(1), new KeyBoardOptions(KeyEvent.VK_UP,KeyEvent.VK_DOWN,KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER));
+		controller.setView(this);
+		this.addKeyListener(controller);
 
 		this.setFocusable(true);
 
@@ -99,14 +95,6 @@ public class GameView extends JPanel {
 	
 	public Model getModel(){
 		return model;
-	}
-	
-	public BasicController getController(Player p){
-		return controllers.get(p);
-	}
-
-	public Map<Player,PlayerController> getControllers() {
-		return controllers;
 	}
 	
 	public void switchEndGameView(){
