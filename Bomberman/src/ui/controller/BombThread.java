@@ -67,7 +67,7 @@ public class BombThread extends Thread {
 
 	public void explode() {			
 		for (Cell c : bomb.getTargets()){
-			ArrayList<Player> players = new ArrayList<Player>(gview.getModel().getPlayers());
+			ArrayList<Player> players = new ArrayList<Player>(model.getPlayers());
 			for(Player p : players)
 				if(p.getX() == c.getX() && p.getY() == c.getY()){
 					gview.getModel().removePlayer(p);
@@ -82,8 +82,9 @@ public class BombThread extends Thread {
 
 	private void destroy(Cell cell) {
 		Cell nextCell = cell.nextState();
-		model.getMap().getCells().remove(cell);
-		model.getMap().getCells().add(nextCell);
+		
+		if(model.getMap().getCells().remove(cell))
+			model.getMap().getCells().add(nextCell);
 	}
 
 	private void getTarget(int x, int y, int spread){

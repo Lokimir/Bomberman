@@ -6,7 +6,7 @@ import ui.view.BombermanVisitor;
 
 public class Player {
 	
-	public static BufferedImage playerSprite;
+	private BufferedImage playerSprite;
 	
 	private final int INIT_X_VALUE;
 	private final int INIT_Y_VALUE;
@@ -58,5 +58,13 @@ public class Player {
 
 	public void die() {
 		isAlive = false;
+	}
+
+	public BufferedImage getSprite() {
+		return playerSprite;
+	}
+
+	public void setSprite(BufferedImage playerSprite) {
+		this.playerSprite = playerSprite;
 	}
 }

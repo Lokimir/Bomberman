@@ -1,7 +1,11 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import core.bonus.Bonus;
+import core.bonus.BonusBomb;
+import core.bonus.BonusSpread;
 import core.cell.BreakableCell;
 import core.cell.Cell;
 import core.cell.FloorCell;
@@ -14,7 +18,9 @@ public class Map {
 	private final static int WIDTH = 12;
 	private final static int HEIGHT = 12;
 	
-	private ArrayList<Cell> cells;
+	private final static int EMPTY_CASE = 10;
+	
+	private volatile ArrayList<Cell> cells;
 
 	public Map(){
 		cells = new ArrayList<>();
@@ -22,7 +28,6 @@ public class Map {
 	}
 	
 	private void buildMap() {
-		
 		// Build the playable map
 		for(int j = 1; j <= WIDTH-1; j++){	
 			for(int i = 1; i <= HEIGHT-1; i++){
@@ -32,11 +37,19 @@ public class Map {
 					else if((i == WIDTH-1 || j == HEIGHT-1) && Math.abs(i - j) <= 1)
 						cells.add(new FloorCell(j, i));
 					else
-						cells.add(new BreakableCell(j, i));
+						cells.add(new BreakableCell(j, i, this.randomBonus()));
 				}
 				else
 					cells.add(new UnbreakableCell(j, i));				
 			}
+		}
+		
+		for (int i = 0; i < EMPTY_CASE; i++){
+			Random r = new Random();
+			int next = r.nextInt(cells.size());
+			Cell c = cells.get(next);
+			cells.remove(c);
+			cells.add(new FloorCell(c));
 		}
 		
 		// Build the surrounding walls
@@ -51,6 +64,18 @@ public class Map {
 		}
 	}
 
+	private Bonus randomBonus() {
+		Bonus bonus;
+		double percent = Math.random()*100;
+		if(percent < 7.5){
+			bonus = new BonusSpread();
+		} else if (percent < 15)
+			bonus = new BonusBomb();
+		else 
+			bonus = null;
+		return bonus;
+	}
+	
 	public ArrayList<Cell> getCells() {
 		return cells;
 	}

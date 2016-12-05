@@ -2,9 +2,9 @@ package core;
 
 public class BombStats {
 	
-	private volatile long duration;
-	private volatile int spread;	
-	private volatile int droppableBomb;
+	private long duration;
+	private int spread;	
+	private int droppableBomb;
 	
 	public BombStats(int duration, int spread, int droppableBomb){
 		this.duration = duration;

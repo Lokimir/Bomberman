@@ -8,7 +8,6 @@ public class UnbreakableCell extends Cell {
 	
 	public UnbreakableCell(int x, int y) {
 		super(x, y);
-		bonus = null;
 	}
 	
 	public BufferedImage getSprite() {

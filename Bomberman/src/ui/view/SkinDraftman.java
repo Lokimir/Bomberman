@@ -37,7 +37,7 @@ public class SkinDraftman implements BombermanVisitor {
 	@Override
 	public void visitPlayer(Player p) {
 		g2d.setColor(Color.RED);
-		g2d.drawImage(Player.playerSprite, p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, null);	
+		g2d.drawImage(p.getSprite(), p.getX()*CELL_SIZE_WIDTH, p.getY()*CELL_SIZE_HEIGHT, null);	
 	}
 
 	@Override

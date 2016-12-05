@@ -61,9 +61,13 @@ public class GameView extends JPanel {
 		UnbreakableCell.setSprite(ImageIO.read(new File(skinURL + "unbreakable.png")));
 		BreakableCell.setSprite(ImageIO.read(new File(skinURL + "breakable.png")));	
 		FloorCell.setSprite(ImageIO.read(new File(skinURL + "floor.png")));
-		Player.playerSprite = ImageIO.read(new File(skinURL + "player1.png"));
 		BonusBomb.setSprite(ImageIO.read(new File(skinURL + "bonusBomb.png")));
 		BonusSpread.setSprite(ImageIO.read(new File(skinURL + "bonusSpread.png")));
+		
+		int i = 1;
+		for(Player p : model.getPlayers()){
+			p.setSprite(ImageIO.read(new File(skinURL + "player" + i++ + ".png")));
+		}
 	}
 
 	@Override

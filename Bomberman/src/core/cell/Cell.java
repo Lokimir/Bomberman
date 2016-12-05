@@ -16,7 +16,6 @@ public abstract class Cell {
 	public Cell(int x, int y){
 		this.x = x;
 		this.y = y;
-		this.bonus = randomBonus();
 	}
 	
 	public Cell(Cell cell){
@@ -39,22 +38,6 @@ public abstract class Cell {
 	
 	public Bonus getBonus() {
 		return this.bonus;
-	}
-	
-	/**return a random bonus in the cell
-	 * return null if they have no bonus in the cell
-	 * @return Bonus
-	 */
-	private Bonus randomBonus() {
-		Bonus bonus;
-		double percent = Math.random()*100;
-		if(percent < 7.5){
-			bonus = new BonusSpread();
-		} else if (percent < 15)
-			bonus = new BonusBomb();
-		else 
-			bonus = null;
-		return bonus;
 	}
 
 	public boolean containBonus() {
