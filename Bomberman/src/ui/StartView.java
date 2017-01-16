@@ -1,7 +1,6 @@
 package ui;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -36,7 +35,7 @@ public class StartView extends JPanel {
 		this.model = _model;
 		this.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
 		
-		/* Ajout du message de fin de partie */
+		/* End game message */
 		this.message = new JLabel();
 		this.message.setText("BOMBERMAN !");
 		this.add(message);
@@ -46,7 +45,7 @@ public class StartView extends JPanel {
 		Rectangle rectangle = new Rectangle((624-width)/2,(624-height)/2,width,height);
 		message.setBounds(rectangle);
 		
-		/* Ajout du bouton restart */
+		/* Adding restart button */
 		newGameButton = new JButton("New Game");
 		newGameButton.setFocusPainted(false);
 		newGameButton.setContentAreaFilled(false);
@@ -65,7 +64,7 @@ public class StartView extends JPanel {
 		this.add(newGameButton);
 		newGameButton.setBounds(((model.getMap().getWidth()+1)*48-BUTTON_SIZE_WIDTH)/2, 500, BUTTON_SIZE_WIDTH, BUTTON_SIZE_HEIGHT);
 		
-		/* ajout du bouton exit */
+		/* Adding exit button */
 		exitButton = new JButton("Exit");
 		exitButton.setFocusPainted(false);
 		exitButton.setContentAreaFilled(false);

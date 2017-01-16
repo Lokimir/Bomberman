@@ -3,8 +3,6 @@ package core.cell;
 import java.awt.image.BufferedImage;
 
 import core.bonus.Bonus;
-import core.bonus.BonusBomb;
-import core.bonus.BonusSpread;
 import ui.view.BombermanVisitor;
 
 

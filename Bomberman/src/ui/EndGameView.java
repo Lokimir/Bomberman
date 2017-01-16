@@ -35,7 +35,7 @@ public class EndGameView extends JPanel {
 		this.model = _model;
 		this.setPreferredSize(new Dimension(model.getMap().getWidth()*48+48,model.getMap().getHeight()*48+48));
 		
-		/* Ajout du message de fin de partie */
+		/* End game message */
 		this.message = new JLabel();
 		this.add(message);
 		FontRenderContext frc= DEFAULT_GRAPHICS.getFontRenderContext();
@@ -44,7 +44,7 @@ public class EndGameView extends JPanel {
 		Rectangle rectangle = new Rectangle((624-width)/2,(624-height)/2,width,height);
 		message.setBounds(rectangle);
 		
-		/* Ajout du bouton restart */
+		/* Adding the restart button */
 		restartButton = new JButton("Restart");
 		restartButton.setFocusPainted(false);
 		restartButton.setContentAreaFilled(false);
@@ -64,7 +64,7 @@ public class EndGameView extends JPanel {
 		this.add(restartButton);
 		restartButton.setBounds(((model.getMap().getWidth()+1)*48-BUTTON_SIZE_WIDTH)/2, 500, BUTTON_SIZE_WIDTH, BUTTON_SIZE_HEIGHT);
 		
-		/* ajout du bouton exit */
+		/* Adding exit button */
 		exitButton = new JButton("Exit");
 		exitButton.setFocusPainted(false);
 		exitButton.setContentAreaFilled(false);
