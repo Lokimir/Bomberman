@@ -10,12 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import ui.controller.BasicController;
-import ui.controller.KeyBoardOptions;
-import ui.controller.PlayerController;
-import ui.view.BasicDraftman;
-import ui.view.BombermanVisitor;
-import ui.view.SkinDraftman;
 import core.Bomb;
 import core.Model;
 import core.Player;
@@ -24,6 +18,12 @@ import core.bonus.BonusSpread;
 import core.cell.BreakableCell;
 import core.cell.FloorCell;
 import core.cell.UnbreakableCell;
+import ui.controller.BasicController;
+import ui.controller.KeyBoardOptions;
+import ui.controller.PlayerController;
+import ui.view.BasicDraftman;
+import ui.view.BombermanVisitor;
+import ui.view.SkinDraftman;
 
 public class GameView extends JPanel {
 
@@ -96,7 +96,6 @@ public class GameView extends JPanel {
 			p.accept(draftman);
 		}
 	}
-	
 	public Model getModel(){
 		return model;
 	}

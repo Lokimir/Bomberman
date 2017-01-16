@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Model {
 
 	private Map map;
-	private ArrayList<Player> players;
+	private volatile ArrayList<Player> players;
 	private volatile ArrayList<Bomb> bombs;
 
 	public Model(){

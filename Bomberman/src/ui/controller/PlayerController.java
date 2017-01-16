@@ -55,11 +55,7 @@ public class PlayerController extends BasicController {
 		gview.repaint();
 	}
 	
-	/**verify if there is nothing on the cell (you can't move on a bomb or another player)
-	 * 	
-	 * @param cell
-	 * @return boolean
-	 */
+	/* verifies if there is nothing on the cell (you can't move on a bomb or another player) */
 	private boolean isAloneOnNextCell(Cell cell) {
 		for(Player p : model.getPlayers())
 			if(p.getX() == cell.getX() && p.getY() == cell.getY())
