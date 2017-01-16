@@ -20,7 +20,8 @@ public class Map {
 	
 	private final static int EMPTY_CASE = 10;
 	
-	private volatile ArrayList<Cell> cells;
+	
+	private ArrayList<Cell> cells;
 
 	public Map(){
 		cells = new ArrayList<>();

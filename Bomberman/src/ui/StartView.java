@@ -1,7 +1,7 @@
 package ui;
 
-import java.awt.Button;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -25,8 +26,8 @@ public class StartView extends JPanel {
 	
 	
 	private Model model;
-	private final Button newGameButton;
-	private final Button exitButton;
+	private final JButton newGameButton;
+	private final JButton exitButton;
 	private final JLabel message;
 	
 
@@ -46,9 +47,11 @@ public class StartView extends JPanel {
 		message.setBounds(rectangle);
 		
 		/* Ajout du bouton restart */
-		newGameButton = new Button("New Game");
-		newGameButton.addActionListener(new ActionListener() {
+		newGameButton = new JButton("New Game");
+		newGameButton.setFocusPainted(false);
+		newGameButton.setContentAreaFilled(false);
 
+		newGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				((CardLayout) cardPanel.getLayout()).show(cardPanel, Bomberman.GAMEVIEW);
@@ -63,7 +66,9 @@ public class StartView extends JPanel {
 		newGameButton.setBounds(((model.getMap().getWidth()+1)*48-BUTTON_SIZE_WIDTH)/2, 500, BUTTON_SIZE_WIDTH, BUTTON_SIZE_HEIGHT);
 		
 		/* ajout du bouton exit */
-		exitButton = new Button("Exit");
+		exitButton = new JButton("Exit");
+		exitButton.setFocusPainted(false);
+		exitButton.setContentAreaFilled(false);
 		exitButton.addActionListener(new ActionListener() {
 
 			@Override
